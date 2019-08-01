@@ -79,3 +79,6 @@ web-report/
 
 #vscode
 .vscode
+
+android/.idea
+android/.idea/*

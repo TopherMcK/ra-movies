@@ -17,6 +17,13 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view />
+      </state>
+    </system>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
@@ -34,8 +41,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="ProjectPane" />
       <pane id="PackagesPane" />
+      <pane id="ProjectPane" />
       <pane id="Scope" />
       <pane id="AndroidView" />
     </panes>
@@ -145,11 +152,11 @@
       <window_info id="Resources Explorer" order="7" />
       <window_info id="Capture Tool" order="8" />
       <window_info anchor="bottom" id="Run" order="0" />
-      <window_info active="true" anchor="bottom" x="143" y="141" width="2161" height="1086" id="Logcat" order="1" sideWeight="0.7138315" type="FLOATING" visible="true" weight="0.80436474" />
+      <window_info anchor="bottom" x="143" y="141" width="2161" height="1086" id="Logcat" order="1" sideWeight="0.7138315" type="FLOATING" visible="true" weight="0.80436474" />
       <window_info anchor="bottom" id="TODO" order="2" />
       <window_info anchor="bottom" id="Debug" order="3" />
       <window_info anchor="bottom" id="Terminal" order="4" />
-      <window_info anchor="bottom" id="Event Log" order="5" sideWeight="0.28616852" side_tool="true" visible="true" weight="0.80436474" />
+      <window_info active="true" anchor="bottom" id="Event Log" order="5" sideWeight="0.28616852" side_tool="true" visible="true" weight="0.80436474" />
       <window_info anchor="bottom" id="Version Control" order="6" />
       <window_info anchor="bottom" id="Build" order="7" sideWeight="0.49960256" weight="0.21745908" />
       <window_info anchor="bottom" id="Android Profiler" order="8" show_stripe_button="false" />
