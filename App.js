@@ -1,12 +1,10 @@
-import React, { Component } from 'react';
-// import Routes from './Routes.js'
-import { Text } from 'react-native';
+import React from 'react';
+import Routes from './Routes'
 
-export default class App extends Component {
+export default class App extends React.Component {
   render() {
     return (
-      // <Routes />
-      <Text>asdf</Text>
+      <Routes />
     );
   }
 }
