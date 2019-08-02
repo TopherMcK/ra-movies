@@ -2,9 +2,17 @@ import React from "react";
 import {shallow} from 'enzyme';
 import ShallowTestUtil from "../../js/utils/ShallowTestUtil";
 import Login from "../../js/login/Login";
+import { JestEnvironment } from "@jest/environment";
 
 describe('Login', () => {
     let testComponent;
+    let navigation;
+    let navigate;
+
+    // client.getMediaMetadata = jest.fn().mockImplementation(() => {
+    //   return { ok: true, body: { data: [] } };
+    // });
+
   
     beforeAll(() => {
       let shallowTestUtil = new ShallowTestUtil();
@@ -12,8 +20,13 @@ describe('Login', () => {
     });
   
     beforeEach(() => {
+      navigate = jest.fn();
+      navigation = {
+        navigate
+      }
+
       props = {
-        navigation: undefined
+        navigation
       };
         testComponent = shallow(<Login {...props} />);
     });
@@ -125,6 +138,12 @@ describe('Login', () => {
       it('should have username prop as "Guest"', () => {
         const buttons = testComponent.find('#skipBtn');
         expect(buttons.at(0).prop('username')).toEqual("Guest");
+      });
+
+      it('should navigate user to Home onPress', () => {
+        const skipBtn = testComponent.find('#skipBtn').at(0);
+        skipBtn.props().onPress();
+        expect(navigate).toBeCalledWith('Home');
       });
     });
   });
