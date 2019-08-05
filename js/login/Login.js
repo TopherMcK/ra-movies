@@ -2,6 +2,15 @@ import React from 'react';
 import { Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
 
 export default class Login extends React.Component {
+
+    constructor() {
+        super();
+
+        this.state = {
+            username: 'Guest'
+        }
+    }
+
     static navigationOptions = {
         header: null
     };
@@ -25,10 +34,14 @@ export default class Login extends React.Component {
                 <View id="buttonsWrapper" style={loginStyles.buttonsWrapper}>
                     <Button id="signInBtn" title="Sign In" style={loginStyles.btns} disabled={true} />
                     <Text>- or -</Text>
-                    <Button id="skipBtn" style={loginStyles.btns} title="skip" username="Guest" onPress={() => this.props.navigation.navigate('Home')} />
+                    <Button id="skipBtn" style={loginStyles.btns} title="skip" onPress={() => this.onLoginBtnPressed(true)} />
                 </View>
             </View>
         );
+    }
+
+    onLoginBtnPressed(isGuest) {
+        this.props.navigation.navigate('Home', {isGuest: isGuest, username: this.state.username});
     }
 }
 

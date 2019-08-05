@@ -1,12 +1,7 @@
 import React from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
-import NavBar from '../shared/navbar/NavBarView';
+import { Text } from 'react-native';
 
 export default class Home extends React.Component {
-    static navigationOptions = {
-        headerTitle: <NavBar />,
-        headerLeft: null
-    };
 
     render() {
         return (

@@ -1,24 +1,36 @@
 import React from 'react';
-import { Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 
 export default class NavBar extends React.Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
+
+        const { navigation } = this.props;
 
         this.state = {
-            shouldShowSearch: false
+            shouldShowSearch: false,
+            shouldShowMenu: false,
+            isGuest: navigation.getParam('isGuest', true),
+            username: navigation.getParam('username', 'Guest')
         }
     }
 
     render() {
-        return (this.getNavBarView());
+        return (
+            this.getNavBarView()
+            );
     }
 
     getNavBarView() {
-        return this.state.shouldShowSearch
-            ? this.getSearchView()
-            : this.getMainSearchView();
+        if(this.state.shouldShowSearch) {
+            return this.getSearchView();
+        } else if(this.state.shouldShowMenu) {
+            return this.getMenuView();
+        } else {
+            return this.getMainNavbarView();
+
+        }
     }
 
     getSearchView() {
@@ -35,17 +47,18 @@ export default class NavBar extends React.Component {
     </View>;
     }
 
-    getMainSearchView() {
+    getMainNavbarView() {
         return <View style={navBarStyles.navWrapper}>
             <Image id="logo" source={require("../../../assets/logo.jpg")} />
-            <Text id="username">Guest</Text>
+            <Text id="username">{this.state.username}</Text>
             <TouchableOpacity id="navBarSearchBtn" onPress={() => this.setState({shouldShowSearch: true})}>
                 <Image source={require("../../../assets/search_icon.png")} />
             </TouchableOpacity>
-            <TouchableOpacity id="navBarMenuBtn">
-                <Image source={require("../../../assets/menu_icon.png")} />
-            </TouchableOpacity>
         </View>;
+    }
+
+    getMenuView() {
+        return <View><Text>Drawer</Text></View>
     }
 
     submitSearch(){

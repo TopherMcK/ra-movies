@@ -1,35 +1,24 @@
 import React from 'react';
+import { Dimensions } from 'react-native';
 import Routes from './Routes'
-import Login from './js/login/Login'
-
-// export default createBottomTabNavigator({
-//   LoginRT: {
-//     screen: Login
-//   },
-//   Home: {
-//     screen: Home
-//   }
-// }, {
-//     tabBarOptions: {
-//       activeTintColor: 'tomato',
-//       inactiveTintColor: 'gray',
-//     }
-//   }
-// );
 
 
+import { DrawerNavigator } from 'react-navigation';
+import HamburgerMenuView from './js/shared/hamburger_menu/HamburgerMenuView';
 
-import { createBottomTabNavigator } from 'react-navigation'
-
-
-// const TabNavigator = createBottomTabNavigator({
-//     LoginTab: {screen: Login}
-// });
+const DrawerNav = DrawerNavigator({
+  Item1: {
+      screen: Routes,
+    }
+  }, {
+    contentComponent: HamburgerMenuView,
+    drawerWidth: Dimensions.get('window').width - 120,  
+});
 
 export default class App extends React.Component {
   render() {
     return (
-      <Routes />
+      <DrawerNav />
     );
   }
 }
