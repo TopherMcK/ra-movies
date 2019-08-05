@@ -8,17 +8,25 @@ export default class HamburgerMenuView extends React.Component {
 
         const { navigation } = this.props;
 
-        this.state = {
-            isGuest: navigation.getParam('isGuest', true),
-            username: navigation.getParam('username', 'Guest')
-        }
+        // if(navigation !== undefined && navigation !== null){
+        //     this.state = {
+        //         isGuest: navigation.getParam('isGuest', true),
+        //         username: navigation.getParam('username', 'Guest')
+        //  }
+        // } else {
+
+            this.state = {
+                isGuest:  true,
+                username: 'Guest'
+            }
+        // }
     }
 
     render() {
         return (
             <View>
             <View>
-                <Text>{this.state.username}</Text>
+                <Text>Guest</Text>
             </View>
                 { this.getSignInOrLogoutView() }
             </View>

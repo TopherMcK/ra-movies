@@ -4,7 +4,7 @@ import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
 export default class HomeTab extends React.Component {
     render() {
         return (
-            <Text>Home</Text>
+            <Text>Home Tab</Text>
         );
     }
 }
