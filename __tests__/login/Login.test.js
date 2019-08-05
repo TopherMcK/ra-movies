@@ -125,19 +125,14 @@ describe('Login', () => {
     })
 
     describe('Skip btn', () => {
-      it('should be enabled by default', () => {
-
-      });
-
-      it('should have username prop as "Guest"', () => {
-        const buttons = testComponent.find('#skipBtn');
-        expect(buttons.at(0).prop('username')).toEqual("Guest");
-      });
-
-      it('should navigate user to Home onPress', () => {
+      it('should navigate user to Home onPress with username as Guest', () => {
         const skipBtn = testComponent.find('#skipBtn').at(0);
         skipBtn.props().onPress();
-        expect(navigate).toBeCalledWith('Home');
+        const expectedParams = {
+          isGuest: true,
+          username: 'Guest'
+        }
+        expect(navigate).toBeCalledWith('Home', expectedParams);
       });
     });
   });

@@ -2,9 +2,16 @@ import React from "react";
 import {shallow} from 'enzyme';
 import ShallowTestUtil from "../../../js/utils/ShallowTestUtil";
 import NavBar from "../../../js/shared/navbar/NavBarView";
+import { when } from 'jest-when'
+
+const fn = jest.fn()
 
 describe('NavBar', () => {
     let testComponent;
+    let navigation;
+    let navigate;
+    let props;
+    let getParam;
 
     var expectedSrcUri = {
         testUri : ""
@@ -16,7 +23,20 @@ describe('NavBar', () => {
     });
   
     beforeEach(() => {
-        testComponent = shallow(<NavBar />);
+        navigate = jest.fn();
+        getParam = jest.fn();
+
+        when(getParam).calledWith('isGuest').mockReturnValue(true);
+        when(getParam).calledWith('username').mockReturnValue('Guest');
+
+        navigation = {
+            navigate,
+            getParam
+        }
+
+        props = {navigation};
+
+        testComponent = shallow(<NavBar {...props}/>);
     });
 
     it('should render', () => {
@@ -36,11 +56,6 @@ describe('NavBar', () => {
         it('should have a search btn with a search image', () => {
             expectedSrcUri.testUri = '../../../assets/search_icon.png';
             expect(testComponent.find('#navBarSearchBtn > Image').props().source).toEqual(expectedSrcUri);
-        });
-    
-        it('should have a menu btn with a menu image', () => {
-            expectedSrcUri.testUri = '../../../assets/menu_icon.png';
-            expect(testComponent.find('#navBarMenuBtn > Image').props().source).toEqual(expectedSrcUri);
         });
     });
 

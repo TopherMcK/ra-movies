@@ -3,17 +3,16 @@ import React from 'react';
 import Login from './js/login/Login';
 
 import { StackNavigator } from 'react-navigation';
-import Home from './js/home/Home';
 import { Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import NavBar from './js/shared/navbar/NavBarView';
-import BottomTabNavigation from './BottTabNavigation';
+import MainView from './js/main/MainView';
 
 const Routes = StackNavigator({
   LoginRT: {
     screen: Login
   },
   Home: {
-    screen: BottomTabNavigation,
+    screen: MainView,
     navigationOptions: ({ navigation }) => ({
       headerTitle: <NavBar navigation={navigation} />,
       headerLeft: null,
