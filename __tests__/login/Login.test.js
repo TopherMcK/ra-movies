@@ -2,17 +2,11 @@ import React from "react";
 import {shallow} from 'enzyme';
 import ShallowTestUtil from "../../js/utils/ShallowTestUtil";
 import Login from "../../js/login/Login";
-import { JestEnvironment } from "@jest/environment";
 
 describe('Login', () => {
     let testComponent;
     let navigation;
     let navigate;
-
-    // client.getMediaMetadata = jest.fn().mockImplementation(() => {
-    //   return { ok: true, body: { data: [] } };
-    // });
-
   
     beforeAll(() => {
       let shallowTestUtil = new ShallowTestUtil();
