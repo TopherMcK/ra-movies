@@ -1,17 +1,26 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { userDataService } from '../../observers/UserDataService';
 
 export default class HamburgerMenuView extends React.Component {
 
     constructor(props) {
         super(props);
 
-        const { navigation } = this.props.navigation;
-
         this.state = {
-            isGuest: navigation === undefined || navigation === null ? true : navigation.getParam('isGuest', true),
-            username: navigation === undefined || navigation === null ? "Guest" : navigation.getParam('username', 'Guest')
+            username: undefined,
+            isGuest: true
          }
+    }
+
+    componentDidMount() {
+        this.subscription = userDataService.getUserData().subscribe(user => {
+                this.setState({
+                    username: user.username,
+                    isGuest: user.isGuest
+                }
+            );
+        });
     }
 
     render() {
@@ -19,15 +28,19 @@ export default class HamburgerMenuView extends React.Component {
         return (
             <View>
                 <View style={hamburgerStyles.headerView}>
-                    <Text style={hamburgerStyles.headerText} >{this.state.username}</Text>
+                    <Text id="usernameTxt" style={hamburgerStyles.headerText} >{this.getUsername()}</Text>
                 </View>
                 <View style={hamburgerStyles.menuListWrapper}>
                     <View style={hamburgerStyles.menuItemView}>
-                    <TouchableOpacity onPress={() => this.logoutUser()}><Text>{ this.getSignInOrLogoutText() }</Text></TouchableOpacity>
+                    <TouchableOpacity id="signoutBtn" onPress={() => this.logoutUser()}><Text>{ this.getSignInOrLogoutText() }</Text></TouchableOpacity>
                     </View>
                 </View>
             </View>
         );
+    }
+
+    getUsername() {
+        return this.state.username === undefined ? 'Guest' : this.state.username;
     }
 
     getSignInOrLogoutText(){

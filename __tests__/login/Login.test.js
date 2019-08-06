@@ -111,7 +111,7 @@ describe('Login', () => {
     });
 
     describe('Sign in btn', () => {
-      it('should be disable until username and password field are valid', () => {
+      it('should be disabled until username and password field are valid', () => {
           // TODO
       });
 
@@ -125,12 +125,12 @@ describe('Login', () => {
     })
 
     describe('Skip btn', () => {
-      it('should navigate user to Home onPress with username as Guest', () => {
+      it('should navigate user to MainView onPress with username undefined and isGuest true', () => {
         const skipBtn = testComponent.find('#skipBtn').at(0);
         skipBtn.props().onPress();
         const expectedParams = {
           isGuest: true,
-          username: 'Guest'
+          username: undefined
         }
         expect(navigate).toBeCalledWith('MainRT', expectedParams);
       });

@@ -1,15 +1,14 @@
 import React from 'react';
 import { Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
+import { isValidUsername, isValidPassword } from './LoginValidation';
+import { userDataService } from '../observers/UserDataService';
 
 export default class Login extends React.Component {
-
     constructor() {
         super();
-
         this.state = {
-            username: 'Guest',
+            username: undefined,
             hasValidUsername: false,
-            hasValidPassword: false
         }
     }
 
@@ -27,14 +26,14 @@ export default class Login extends React.Component {
 
                 <View id="usernameWrapper" style={loginStyles.usernameWrapper}>
                     <Text id="usernameLabel" style={loginStyles.inputLabel}>User Name</Text>
-                    <TextInput id="usernameTextInput" style={loginStyles.textInputs}></TextInput>
+                    <TextInput id="usernameTextInput" style={loginStyles.textInputs} onChangeText={(value) => this.onUNInput(value)}></TextInput>
                 </View>
                 <View id="passwordWrapper" style={loginStyles.passwordWrapper}>
                     <Text id="passwordLabel" style={loginStyles.inputLabel}>Password</Text>
-                    <TextInput id="passwordTextInput" style={loginStyles.textInputs} autoCompleteType="password"></TextInput>
+                    <TextInput id="passwordTextInput" style={loginStyles.textInputs} autoCompleteType="password" onChangeText={(value) => this.onPasswordInput(value)}></TextInput>
                 </View>
                 <View id="buttonsWrapper" style={loginStyles.buttonsWrapper}>
-                    <Button id="signInBtn" title="Sign In" style={loginStyles.btns} disabled={true} />
+                    <Button id="signInBtn" title="Sign In" style={loginStyles.btns} disabled={!this.shouldEnableLoginBtn()} onPress={() => this.onLoginBtnPressed(false)} />
                     <Text>- or -</Text>
                     <Button id="skipBtn" style={loginStyles.btns} title="skip" onPress={() => this.onLoginBtnPressed(true)} />
                 </View>
@@ -42,13 +41,28 @@ export default class Login extends React.Component {
         );
     }
 
-    // TODO
-    onUNInput(){}
-    // TODO
-    onPasswordInput(){}
+    onUNInput(usernameInput) {
+       this.setState({hasValidUsername : isValidUsername(usernameInput)});
+       
+        if (this.state.hasValidUsername) {
+            this.setState({username : usernameInput});
+        } else if(this.state.username !== undefined) {
+            this.setState({username : undefined});
+        }
+    }
+
+    onPasswordInput(passwordInput) {
+        this.setState({hasValidPassword : isValidPassword(passwordInput)});
+    }
+
+    shouldEnableLoginBtn() {
+        return this.state.hasValidPassword && this.state.hasValidUsername;
+    }
 
     onLoginBtnPressed(isGuest) {
-        this.props.navigation.navigate('MainRT', {isGuest: isGuest, username: this.state.username});
+        const username = isGuest ? undefined : this.state.username;
+        userDataService.sendUserData(username, isGuest);
+        this.props.navigation.navigate('MainRT', {isGuest: isGuest, username: username});
     }
 }
 

@@ -50,15 +50,15 @@ export default class NavBar extends React.Component {
     getMainNavbarView() {
         return <View style={navBarStyles.navWrapper}>
             <Image id="logo" source={require("../../../assets/logo.jpg")} />
-            <Text id="username">{this.state.username}</Text>
+            <Text id="username">{this.getUsername()}</Text>
             <TouchableOpacity id="navBarSearchBtn" onPress={() => this.setState({shouldShowSearch: true})}>
                 <Image source={require("../../../assets/search_icon.png")} />
             </TouchableOpacity>
         </View>;
     }
 
-    getMenuView() {
-        return <View><Text>Drawer</Text></View>
+    getUsername() {
+        return this.state.username === undefined ? 'Guest' : this.state.username;
     }
 
     submitSearch(){

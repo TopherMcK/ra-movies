@@ -3,7 +3,7 @@ import React from 'react';
 import Login from './js/login/Login';
 
 import { StackNavigator } from 'react-navigation';
-import { Button, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { Image, TouchableOpacity } from 'react-native';
 import NavBar from './js/shared/navbar/NavBarView';
 import MainView from './js/main/MainView';
 
