@@ -132,7 +132,7 @@ describe('Login', () => {
           isGuest: true,
           username: 'Guest'
         }
-        expect(navigate).toBeCalledWith('Home', expectedParams);
+        expect(navigate).toBeCalledWith('MainRT', expectedParams);
       });
     });
   });

@@ -7,7 +7,9 @@ export default class Login extends React.Component {
         super();
 
         this.state = {
-            username: 'Guest'
+            username: 'Guest',
+            hasValidUsername: false,
+            hasValidPassword: false
         }
     }
 
@@ -40,8 +42,13 @@ export default class Login extends React.Component {
         );
     }
 
+    // TODO
+    onUNInput(){}
+    // TODO
+    onPasswordInput(){}
+
     onLoginBtnPressed(isGuest) {
-        this.props.navigation.navigate('Home', {isGuest: isGuest, username: this.state.username});
+        this.props.navigation.navigate('MainRT', {isGuest: isGuest, username: this.state.username});
     }
 }
 

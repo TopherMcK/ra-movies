@@ -1,8 +1,6 @@
 import React from 'react';
 import { Dimensions } from 'react-native';
 import Routes from './Routes'
-
-
 import { DrawerNavigator } from 'react-navigation';
 import HamburgerMenuView from './js/shared/hamburger_menu/HamburgerMenuView';
 

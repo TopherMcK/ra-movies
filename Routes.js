@@ -11,13 +11,13 @@ const Routes = StackNavigator({
   LoginRT: {
     screen: Login
   },
-  Home: {
+  MainRT: {
     screen: MainView,
     navigationOptions: ({ navigation }) => ({
       headerTitle: <NavBar navigation={navigation} />,
       headerLeft: null,
       headerRight: (
-      <TouchableOpacity id="navBarMenuBtn" onPress={() => navigation.navigate("DrawerOpen")}>
+      <TouchableOpacity id="navBarMenuBtn" onPress={() => navigation.openDrawer()}>
         <Image source={require("./assets/menu_icon.png")} />
       </TouchableOpacity>)
     }),
