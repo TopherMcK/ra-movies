@@ -1,10 +1,16 @@
 import React from 'react';
 import BottomTabNavigation from '../../BottTabNavigation';
-import { ActivityIndicator, FlatList, Text, View } from 'react-native'
+
+import { FlatList, Text, View } from 'react-native'
 import { searchSuggestionObserver } from '../observers/SearchResultsObserver';
 import { contentLoadingObserver } from '../observers/ContenLoadingObserver'
+import  { globalStyle } from '../utils/GlobalStyles';
+
 
 export default class MainView extends React.Component {
+    static navigationOptions = {
+        headerStyle: globalStyle.NavBackground
+     }
 
     constructor() {
         super();
@@ -14,6 +20,7 @@ export default class MainView extends React.Component {
             hasValidSearchSuggestions: false,
             searchSuggestions: undefined
         }
+
     }
 
     componentDidMount() {
@@ -39,19 +46,8 @@ export default class MainView extends React.Component {
 
     render() {
         return (
-            <View>
-                {this.checkToShowActivityIndicator()}
-                {this.getMainView()}
-            </View>
+            this.getMainView()
         );
-    }
-
-    checkToShowActivityIndicator() {
-        if (this.state.isLoading) {
-            return <ActivityIndicator></ActivityIndicator>;
-        } else {
-            return null;
-        }
     }
 
     getMainView() {

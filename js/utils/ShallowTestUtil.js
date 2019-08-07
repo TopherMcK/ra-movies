@@ -5,6 +5,6 @@ export default class ShallowTestUtil {
     constructor(){}
 
     prepTest() {
-        configure({ adapter: new Adapter() })
+        configure({ adapter: new Adapter() });
     }
 }

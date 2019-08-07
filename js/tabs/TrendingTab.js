@@ -1,10 +1,13 @@
 import React from 'react';
-import { Button, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Text } from 'react-native';
+import BaseTab from './BaseTab';
 
-export default class TrendingTab extends React.Component {
-    render() {
-        return (
-            <Text>Trending</Text>
-        );
+export default class TrendingTab extends BaseTab {
+    constructor(){
+        super();
+    }
+
+    getTabContentView(){
+        return <Text>Trending Tab is now inheriting from base</Text>;
     }
 }

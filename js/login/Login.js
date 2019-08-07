@@ -42,7 +42,7 @@ export default class Login extends React.Component {
     }
 
     onUNInput(usernameInput) {
-       this.setState({hasValidUsername : isValidUsername(usernameInput)});
+       this.setState({hasValidUsername : isValidUsername(usernameInput.trim())});
        
         if (this.state.hasValidUsername) {
             this.setState({username : usernameInput});
@@ -60,7 +60,7 @@ export default class Login extends React.Component {
     }
 
     onLoginBtnPressed(isGuest) {
-        const username = isGuest ? undefined : this.state.username;
+        const username = isGuest ? undefined : this.state.username.trim();
         userDataService.sendUserData(username, isGuest);
         this.props.navigation.navigate('MainRT', {isGuest: isGuest, username: username});
     }

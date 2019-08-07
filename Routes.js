@@ -6,6 +6,7 @@ import { StackNavigator } from 'react-navigation';
 import { Image, TouchableOpacity } from 'react-native';
 import NavBar from './js/shared/navbar/NavBarView';
 import MainView from './js/main/MainView';
+import { globalStyle } from './js/utils/GlobalStyles';
 
 const Routes = StackNavigator({
   LoginRT: {
@@ -18,7 +19,7 @@ const Routes = StackNavigator({
       headerLeft: null,
       headerRight: (
       <TouchableOpacity id="navBarMenuBtn" onPress={() => navigation.openDrawer()}>
-        <Image source={require("./assets/menu_icon.png")} />
+        <Image source={require("./assets/menu_icon.png")} style={globalStyle.NavBurger} />
       </TouchableOpacity>)
     }),
     headerStyle: { paddingRight: 10, paddingLeft: 15 }
