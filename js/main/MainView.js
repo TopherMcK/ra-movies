@@ -1,7 +1,8 @@
 import React from 'react';
 import BottomTabNavigation from '../../BottTabNavigation';
-import { ActivityIndicator, Text, View } from 'react-native'
+import { ActivityIndicator, FlatList, Text, View } from 'react-native'
 import { searchSuggestionObserver } from '../observers/SearchResultsObserver';
+import { contentLoadingObserver } from '../observers/ContenLoadingObserver'
 
 export default class MainView extends React.Component {
 
@@ -11,20 +12,29 @@ export default class MainView extends React.Component {
             isLoading: false,
             isSearching: false,
             hasValidSearchSuggestions: false,
-            searchSuggestions: []
+            searchSuggestions: undefined
         }
     }
 
     componentDidMount() {
-        searchSuggestionObserver.getSearchSuggestionResults().subscribe((hasValidSearchSuggestions, suggestionResults) => {
-                        this.setState({
-                            isSearching: true,
-                            hasValidSearchSuggestions: hasValidSearchSuggestions,
-                            searchSuggestions: suggestionResults
-                        }
+        searchSuggestionObserver.getSearchSuggestionResults().subscribe((value) => {
+            this.setState({
+                isLoading: false,
+                isSearching: true,
+                hasValidSearchSuggestions: value.hasValidResponse,
+                searchSuggestions: value.results
+            });
+        });
+
+        contentLoadingObserver.getContentLoadingCheck().subscribe((isLoading) => {
+            this.setState({
+                isLoading: isLoading
+            })
+        });
+    }
+
+    setupSubscriptions() {
         
-                    );
-                });
     }
 
     render() {
@@ -53,8 +63,19 @@ export default class MainView extends React.Component {
     }
 
     getSearchResultsView() {
+        // console.log("Has Valid Search Suggestions? : " + this.state.hasValidSearchSuggestions);
         if(this.state.hasValidSearchSuggestions) {
-            return <Text>Results found.</Text>
+            console.log("Search Suggestions: " + JSON.stringify(this.state.searchSuggestions));
+            return  <FlatList
+            dataSource={this.state.searchSuggestions}
+            renderSeparator= {this.ListViewItemSeparator}
+            renderRow={(rowData) =>
+           <View style={{flex:1, flexDirection: 'column'}} >
+             <Text style={styles.textViewContainer} >{rowData.title}</Text>
+           </View>
+            }
+          />
+            // return <Text>Results Found</Text>
         } else {
             return <Text>No results found...</Text>
         }
