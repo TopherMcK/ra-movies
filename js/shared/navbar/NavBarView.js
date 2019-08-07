@@ -1,5 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { defaultUsername } from '../../utils/AppConstants';
+import { searchService } from '../../rest/SearchService';
 
 export default class NavBar extends React.Component {
 
@@ -39,7 +41,7 @@ export default class NavBar extends React.Component {
             <Image source={require("../../../assets/arrow_back.png")} />
         </TouchableOpacity>
 
-        <TextInput style={navBarStyles.searchTextInput} placeholder="Search Movies...." />
+        <TextInput style={navBarStyles.searchTextInput} placeholder="Search Movies...." onChangeText={(value) => this.getSearchSuggestion(value)} />
 
         <TouchableOpacity id="navBarSubmitSearchBtn" style={navBarStyles.rightItem} onPress={() => this.submitSearch()}>
             <Image source={require("../../../assets/search_icon.png")} />
@@ -58,7 +60,11 @@ export default class NavBar extends React.Component {
     }
 
     getUsername() {
-        return this.state.username === undefined ? 'Guest' : this.state.username;
+        return this.state.username === undefined ? defaultUsername : this.state.username;
+    }
+
+    getSearchSuggestion(value){
+        searchService.getSearchSuggestionResults(value);
     }
 
     submitSearch(){

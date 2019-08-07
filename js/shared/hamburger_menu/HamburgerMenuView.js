@@ -1,6 +1,7 @@
 import React from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { userDataService } from '../../observers/UserDataService';
+import { defaultUsername } from '../../utils/AppConstants';
 
 export default class HamburgerMenuView extends React.Component {
 
@@ -40,7 +41,7 @@ export default class HamburgerMenuView extends React.Component {
     }
 
     getUsername() {
-        return this.state.username === undefined ? 'Guest' : this.state.username;
+        return this.state.username === undefined ? defaultUsername : this.state.username;
     }
 
     getSignInOrLogoutText(){
