@@ -2,6 +2,8 @@ import React from 'react';
 import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import { defaultUsername } from '../../utils/AppConstants';
 import { searchService } from '../../rest/SearchService';
+import  { globalStyle } from '../../utils/GlobalStyles';
+import { userDataUtil } from '../../utils/UserDataUtil';
 
 export default class NavBar extends React.Component {
 
@@ -38,23 +40,23 @@ export default class NavBar extends React.Component {
     getSearchView() {
         return <View style={navBarStyles.navWrapper}>
         <TouchableOpacity style={navBarStyles.leftItem} id="navBarSearchReturnBtn" onPress={() => this.setState({shouldShowSearch: false})}>
-            <Image source={require("../../../assets/arrow_back.png")} />
+            <Image source={require("../../../assets/arrow_back.png")} style={globalStyle.NavBackButton} />
         </TouchableOpacity>
 
         <TextInput style={navBarStyles.searchTextInput} placeholder="Search Movies...." onChangeText={(value) => this.getSearchSuggestion(value)} />
 
         <TouchableOpacity id="navBarSubmitSearchBtn" style={navBarStyles.rightItem} onPress={() => this.submitSearch()}>
-            <Image source={require("../../../assets/search_icon.png")} />
+            <Image source={require("../../../assets/search_icon.png")} style={globalStyle.NavItem} />
         </TouchableOpacity>
     </View>;
     }
 
     getMainNavbarView() {
         return <View style={navBarStyles.navWrapper}>
-            <Image id="logo" source={require("../../../assets/logo.jpg")} />
-            <Text id="username">{this.getUsername()}</Text>
+            <Image id="logo" style={globalStyle.NavLogo} source={require("../../../assets/logo.png")} style={globalStyle.NavLogo} />
+            <Text id="username" style={globalStyle.NavText} >{userDataUtil.getDisplayUsername(this.getUsername())}</Text>
             <TouchableOpacity id="navBarSearchBtn" onPress={() => this.setState({shouldShowSearch: true})}>
-                <Image source={require("../../../assets/search_icon.png")} />
+                <Image source={require("../../../assets/search_icon.png")} style={globalStyle.NavItem} />
             </TouchableOpacity>
         </View>;
     }
@@ -85,7 +87,9 @@ const navBarStyles = StyleSheet.create({
     },
     searchTextInput: {
         flex: 4,
-        minWidth:70
+        minWidth:70,
+        backgroundColor: 'white',
+        borderRadius: 10,
     },
     rightItem: {
         flex: 1,
