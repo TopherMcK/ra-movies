@@ -4,6 +4,7 @@ import { defaultUsername } from '../../utils/AppConstants';
 import { searchService } from '../../rest/SearchService';
 import  { globalStyle } from '../../utils/GlobalStyles';
 import { userDataUtil } from '../../utils/UserDataUtil';
+import { navigationObserver } from '../../observers/NavigationObserver'
 
 export default class NavBar extends React.Component {
 
@@ -33,13 +34,12 @@ export default class NavBar extends React.Component {
             return this.getMenuView();
         } else {
             return this.getMainNavbarView();
-
         }
     }
 
     getSearchView() {
         return <View style={navBarStyles.navWrapper}>
-        <TouchableOpacity style={navBarStyles.leftItem} id="navBarSearchReturnBtn" onPress={() => this.setState({shouldShowSearch: false})}>
+        <TouchableOpacity style={navBarStyles.leftItem} id="navBarSearchReturnBtn" onPress={() => this.onBackArrowPressed()}>
             <Image source={require("../../../assets/arrow_back.png")} style={globalStyle.NavBackButton} />
         </TouchableOpacity>
 
@@ -71,6 +71,11 @@ export default class NavBar extends React.Component {
 
     submitSearch(){
         // TODO
+    }
+
+    onBackArrowPressed() {
+        this.setState({shouldShowSearch: false});
+        navigationObserver.sendDestination("Home");
     }
 }
 

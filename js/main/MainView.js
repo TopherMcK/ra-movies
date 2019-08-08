@@ -5,7 +5,8 @@ import { FlatList, Text, View } from 'react-native'
 import { searchSuggestionObserver } from '../observers/SearchResultsObserver';
 import { contentLoadingObserver } from '../observers/ContenLoadingObserver'
 import  { globalStyle } from '../utils/GlobalStyles';
-
+import { activityIndicatorHelper } from '../shared/indicators/ActivityIndicatorHelper';
+import { navigationObserver } from '../observers/NavigationObserver'
 
 export default class MainView extends React.Component {
     static navigationOptions = {
@@ -15,33 +16,39 @@ export default class MainView extends React.Component {
     constructor() {
         super();
         this.state = {
-            isLoading: false,
             isSearching: false,
+            isLoading: false,
             hasValidSearchSuggestions: false,
             searchSuggestions: undefined
         }
-
     }
 
     componentDidMount() {
-        searchSuggestionObserver.getSearchSuggestionResults().subscribe((value) => {
-            this.setState({
-                isLoading: false,
-                isSearching: true,
-                hasValidSearchSuggestions: value.hasValidResponse,
-                searchSuggestions: value.results
-            });
-        });
+        this.setupSubscriptions();
+    }
 
+    setupSubscriptions() {
         contentLoadingObserver.getContentLoadingCheck().subscribe((isLoading) => {
             this.setState({
                 isLoading: isLoading
             })
         });
-    }
 
-    setupSubscriptions() {
-        
+        navigationObserver.getDestination().subscribe((destination) => {
+            this.setState({
+                isSearching: false
+            })
+        });
+
+        searchSuggestionObserver.getSearchSuggestionResults().subscribe((value) => {
+            this.setState({
+                isSearching: true,
+                isLoading: false,
+                hasValidSearchSuggestions: value.hasValidResponse,
+                searchSuggestions: value.results
+            });
+            contentLoadingObserver.sendIsContentLoading(false);
+        });
     }
 
     render() {
@@ -52,14 +59,16 @@ export default class MainView extends React.Component {
 
     getMainView() {
         if (this.state.isSearching) {
-            return this.getSearchResultsView();
+            return <View>
+                { activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading) }
+                { this.getSearchResultsView() }
+            </View>;
         } else {
-            return <BottomTabNavigation />
+            return <BottomTabNavigation />;
         }
     }
 
     getSearchResultsView() {
-        // console.log("Has Valid Search Suggestions? : " + this.state.hasValidSearchSuggestions);
         if(this.state.hasValidSearchSuggestions) {
             console.log("Search Suggestions: " + JSON.stringify(this.state.searchSuggestions));
             return  <FlatList
@@ -71,7 +80,6 @@ export default class MainView extends React.Component {
            </View>
             }
           />
-            // return <Text>Results Found</Text>
         } else {
             return <Text>No results found...</Text>
         }
