@@ -5,8 +5,8 @@ import { FlatList, Text, View } from 'react-native'
 import { searchSuggestionObserver } from '../observers/SearchResultsObserver';
 import { contentLoadingObserver } from '../observers/ContenLoadingObserver'
 import  { globalStyle } from '../utils/GlobalStyles';
-import { activityIndicatorHelper } from '../shared/indicators/ActivityIndicatorHelper';
 import { navigationObserver } from '../observers/NavigationObserver'
+import { activityIndicatorHelper } from '../shared/indicators/ActivityIndicatorHelper'
 
 export default class MainView extends React.Component {
     static navigationOptions = {
@@ -60,7 +60,6 @@ export default class MainView extends React.Component {
     getMainView() {
         if (this.state.isSearching) {
             return <View>
-                { activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading) }
                 { this.getSearchResultsView() }
             </View>;
         } else {
@@ -70,18 +69,22 @@ export default class MainView extends React.Component {
 
     getSearchResultsView() {
         if(this.state.hasValidSearchSuggestions) {
+            const searchResult = this.state.searchSuggestions
             console.log("Search Suggestions: " + JSON.stringify(this.state.searchSuggestions));
-            return  <FlatList
-            dataSource={this.state.searchSuggestions}
-            renderSeparator= {this.ListViewItemSeparator}
-            renderRow={(rowData) =>
-           <View style={{flex:1, flexDirection: 'column'}} >
-             <Text style={styles.textViewContainer} >{rowData.title}</Text>
-           </View>
+
+            return <View>
+            <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
+            <FlatList data={searchResult.Search} renderItem={({ item }) =>
+              <Text >{item.Title}</Text>
             }
           />
-        } else {
-            return <Text>No results found...</Text>
+          </View>
+        } 
+        else {
+            return <View>
+            <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
+                <Text>No results found...</Text>
+                </View>;
         }
     }
 }

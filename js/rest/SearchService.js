@@ -5,7 +5,7 @@ import { contentLoadingObserver } from "../observers/ContenLoadingObserver";
 export const searchService = {
     getSearchSuggestionResults(searchParam) {
         contentLoadingObserver.sendIsContentLoading(true);
-        urlRequest = omdbURL + "t=" + searchParam + "&type=movie&apikey=" + omdbApiKey;
+        urlRequest = omdbURL + "s=" + searchParam + "&type=movie&apikey=" + omdbApiKey;
         fetch(urlRequest)
             .then((response) => {
                 console.log("Current Response for " + urlRequest + " : " + response.status);
