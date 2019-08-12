@@ -1,7 +1,9 @@
 import React from 'react';
-import { Button, Image, StyleSheet, Text, TextInput, View } from 'react-native';
+import { Image, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
 import { isValidUsername, isValidPassword } from './LoginValidation';
 import { userDataService } from '../observers/UserDataService';
+import { globalStyle } from '../utils/GlobalStyles';
+import { ButtonScaler } from '../utils/ButtonScaler';
 
 export default class Login extends React.Component {
     constructor() {
@@ -9,6 +11,8 @@ export default class Login extends React.Component {
         this.state = {
             username: undefined,
             hasValidUsername: false,
+            pressedSkip: false,
+            pressedSignin: false,
         }
     }
 
@@ -18,25 +22,31 @@ export default class Login extends React.Component {
 
     render() {
         return (
-            <View id="loginWrapper" style={loginStyles.loginWrapper}>
-                <View style={{flexDirection: 'row', alignItems: 'center'}}>
-                    <Image id="storefrontImg" style={loginStyles.storefrontImg} source={require('../../assets/storefront.jpg')} />
-                    <Text id="loginTitle" style={loginStyles.header}>Sign In</Text>
+            <View style={globalStyle.LoginContainer}>
+                <View style={globalStyle.LoginSpacer}></View>
+                <View id="loginWrapper" style={globalStyle.LoginView}>
+                <View id="contentView" style={globalStyle.LoginContentView}>
+                <Image id="storefrontImg" style={globalStyle.LoginLogo} source={require('../../assets/main_logo.png')} />
+                <View id="usernameWrapper" style={globalStyle.LoginGroup}>
+                    <Text id="usernameLabel" style={globalStyle.LoginLabel}>User Name</Text>
+                    <TextInput id="usernameTextInput" style={globalStyle.InputField} onChangeText={(value) => this.onUNInput(value)}></TextInput>
                 </View>
-
-                <View id="usernameWrapper" style={loginStyles.usernameWrapper}>
-                    <Text id="usernameLabel" style={loginStyles.inputLabel}>User Name</Text>
-                    <TextInput id="usernameTextInput" style={loginStyles.textInputs} onChangeText={(value) => this.onUNInput(value)}></TextInput>
+                <View id="passwordWrapper" style={globalStyle.LoginGroup}>
+                    <Text id="passwordLabel" style={globalStyle.LoginLabel}>Password</Text>
+                    <TextInput id="passwordTextInput" style={globalStyle.InputField} autoCompleteType="password" onChangeText={(value) => this.onPasswordInput(value)}></TextInput>
                 </View>
-                <View id="passwordWrapper" style={loginStyles.passwordWrapper}>
-                    <Text id="passwordLabel" style={loginStyles.inputLabel}>Password</Text>
-                    <TextInput id="passwordTextInput" style={loginStyles.textInputs} autoCompleteType="password" onChangeText={(value) => this.onPasswordInput(value)}></TextInput>
+                <View id="buttonsWrapper" style={globalStyle.LoginGroup}>
+                    <ButtonScaler activeOpacity={1} id="signInBtn" style={this.state.pressedSignin ? globalStyle.LoginButtonPressed : globalStyle.LoginButton} disabled={!this.shouldEnableLoginBtn()} onPress={() => this.onLoginBtnPressed(false)}>
+                        <Text style={!this.shouldEnableLoginBtn() ? globalStyle.LoginButtonTextDisabled : globalStyle.LoginButtonText}>Sign In</Text>
+                    </ButtonScaler>
+                    <Text style={globalStyle.LoginText}>- or -</Text>
+                    <ButtonScaler activeOpacity={1} id="skipBtn" style={globalStyle.LoginButton} onPress={() => this.onLoginBtnPressed(true)}>
+                        <Text style={globalStyle.LoginButtonText}>Skip</Text>
+                     </ButtonScaler>
                 </View>
-                <View id="buttonsWrapper" style={loginStyles.buttonsWrapper}>
-                    <Button id="signInBtn" title="Sign In" style={loginStyles.btns} disabled={!this.shouldEnableLoginBtn()} onPress={() => this.onLoginBtnPressed(false)} />
-                    <Text>- or -</Text>
-                    <Button id="skipBtn" style={loginStyles.btns} title="skip" onPress={() => this.onLoginBtnPressed(true)} />
                 </View>
+                </View>
+                <View style={globalStyle.LoginSpacer}></View>
             </View>
         );
     }
@@ -78,7 +88,7 @@ const loginStyles = StyleSheet.create({
         fontSize: 60
     },
     usernameWrapper: {
-        marginTop: 20
+        marginTop: 10
     },
     passwordWrapper: {
         marginTop: 20

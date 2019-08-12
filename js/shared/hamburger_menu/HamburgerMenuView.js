@@ -1,7 +1,9 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { userDataService } from '../../observers/UserDataService';
 import { defaultUsername } from '../../utils/AppConstants';
+import { globalStyle } from '../../utils/GlobalStyles';
+import { ButtonScaler } from '../../utils/ButtonScaler';
 
 export default class HamburgerMenuView extends React.Component {
 
@@ -10,7 +12,8 @@ export default class HamburgerMenuView extends React.Component {
 
         this.state = {
             username: undefined,
-            isGuest: true
+            isGuest: true,
+            pressedSignin: false,
          }
     }
 
@@ -28,13 +31,14 @@ export default class HamburgerMenuView extends React.Component {
 
         return (
             <View>
-                <View style={hamburgerStyles.headerView}>
-                    <Text id="usernameTxt" style={hamburgerStyles.headerText} >{this.getUsername()}</Text>
+                <View style={globalStyle.BurgerHeader}>
+                    <Text style={globalStyle.BurgerWelcome}>Welcome back,</Text>
+                    <Text id="usernameTxt" style={globalStyle.BurgerUserName} >{this.getUsername()}</Text>
                 </View>
                 <View style={hamburgerStyles.menuListWrapper}>
-                    <View style={hamburgerStyles.menuItemView}>
-                    <TouchableOpacity id="signoutBtn" onPress={() => this.logoutUser()}><Text>{ this.getSignInOrLogoutText() }</Text></TouchableOpacity>
-                    </View>
+                    <ButtonScaler activeOpacity={1} style={this.state.pressedSignin ? globalStyle.LoginButtonPressed : globalStyle.LoginButton} id="signoutBtn" onPress={() => this.logoutUser()}>
+                        <Text style={globalStyle.LoginButtonText}>{ this.getSignInOrLogoutText() }</Text>
+                    </ButtonScaler>
                 </View>
             </View>
         );
@@ -71,10 +75,10 @@ const hamburgerStyles = StyleSheet.create({
     },
     headerText: {
         color: '#fff',
-        fontSize: 20
+        fontSize: 20,
     },
     menuListWrapper: {
-        padding: 40
+        padding: 40,
     },
     menuItemView: {
         borderBottomColor: '#000',

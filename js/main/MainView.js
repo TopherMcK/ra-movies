@@ -64,7 +64,7 @@ export default class MainView extends React.Component {
                 { this.getSearchResultsView() }
             </View>;
         } else {
-            return <BottomTabNavigation />;
+            return <BottomTabNavigation/>;
         }
     }
 

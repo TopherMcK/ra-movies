@@ -8,4 +8,4 @@ export const omdbURL = "http://www.omdbapi.com/?";
 
 // CSS
 export const blockbusterBlue = "#1030AD";
-export const blockbusterYellow = "#f9f701";
+export const blockbusterYellow = "#ffa903"//"#f9f701";
