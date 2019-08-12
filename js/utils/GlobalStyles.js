@@ -140,13 +140,15 @@ export const globalStyle = StyleSheet.create({
         padding: 5,
     },
     MovieListItem: {
-        alignSelf: "center",
-        height: 50,
-        width: '90%',
-        backgroundColor: 'grey',
-        color: 'black',
-        borderRadius: 20,
-        fontFamily: 'blockbuster',
+        flexDirection: "row",
+        marginVertical: 10,
+        padding: 8,
+        textAlign: 'center',
+        alignContent: 'center',
+        height: 80,
+        width: '98%',
+        backgroundColor: 'white',
+        borderRadius: 10,
         shadowColor: "#000",
         shadowOffset: {
             width: 0,
@@ -156,4 +158,21 @@ export const globalStyle = StyleSheet.create({
         shadowRadius: 2.62,
         elevation: 4,
     }, 
+    MovieListImage: {
+        marginHorizontal: 10,
+        width: 60,
+        height: 60,
+        borderRadius: 10,
+    },
+    MovieListText: {
+        fontFamily: 'blockbuster',
+        color: blockbusterBlue,
+        overflow: 'hidden',
+        flexWrap: 'nowrap',
+        fontSize: 18,
+    },
+    MovieListTextContainer: {
+        height: 60,
+        width: 300,
+    }
 });

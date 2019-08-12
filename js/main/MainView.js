@@ -7,6 +7,7 @@ import { contentLoadingObserver } from '../observers/ContenLoadingObserver'
 import  { globalStyle } from '../utils/GlobalStyles';
 import { navigationObserver } from '../observers/NavigationObserver'
 import { activityIndicatorHelper } from '../shared/indicators/ActivityIndicatorHelper'
+import SearchResultCell from '../shared/cells/SearchResultCell'
 
 export default class MainView extends React.Component {
     static navigationOptions = {
@@ -15,6 +16,7 @@ export default class MainView extends React.Component {
 
     constructor() {
         super();
+
         this.state = {
             isSearching: false,
             isLoading: false,
@@ -75,7 +77,7 @@ export default class MainView extends React.Component {
             return <View>
             <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
             <FlatList data={searchResult.Search} renderItem={({ item }) =>
-              <Text >{item.Title}</Text>
+              <SearchResultCell item={this.SetupCell(item)} />
             }
           />
           </View>
@@ -86,5 +88,17 @@ export default class MainView extends React.Component {
                 <Text>No results found...</Text>
                 </View>;
         }
+    }
+
+    SetupCell(item) {
+        const Cell = {
+            imageSrc: {
+                uri: item.Poster
+            },
+            title: item.Title,
+            year: item.Year
+        }
+
+        return Cell;
     }
 }

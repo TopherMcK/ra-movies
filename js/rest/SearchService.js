@@ -8,7 +8,6 @@ export const searchService = {
         urlRequest = omdbURL + "s=" + searchParam + "&type=movie&apikey=" + omdbApiKey;
         fetch(urlRequest)
             .then((response) => {
-                console.log("Current Response for " + urlRequest + " : " + response.status);
                 if(response.status !== 200) {
                     this.handleError(response.status)
                     return undefined;
@@ -17,7 +16,6 @@ export const searchService = {
                 }
             }).then((responseJson) => {
                 if(responseJson !== undefined) {
-                    console.log("Calling Handle Success !!");
                     this.handleSuccess(responseJson);
                 }
                 return;
@@ -28,13 +26,11 @@ export const searchService = {
     },
 
     handleSuccess(responseJson) {
-        console.log("responseJson.Response : " + responseJson.Response);
         const hasValidResponse = responseJson.Response !== "False" ? true : false;
         searchSuggestionObserver.sendSearchSuggestionResults(hasValidResponse, responseJson);
     },
 
     handleError(error){
-        console.log("Error retrieving search suggestions : " + error);
         searchSuggestionObserver.sendSearchSuggestionResults(false, undefined);
     }
 }

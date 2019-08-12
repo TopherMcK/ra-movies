@@ -7,6 +7,9 @@ describe('Login', () => {
     let testComponent;
     let navigation;
     let navigate;
+
+    let mockIsValidUsername;
+    let mockIsValidPassword;
   
     beforeAll(() => {
       let shallowTestUtil = new ShallowTestUtil();
@@ -22,7 +25,11 @@ describe('Login', () => {
       props = {
         navigation
       };
-        testComponent = shallow(<Login {...props} />);
+      
+      testComponent = shallow(<Login {...props} />);
+
+      testComponent.instance().isValidUsername = mockIsValidUsername
+      testComponent.instance().mockIsValidPassword = mockIsValidPassword
     });
 
     it('should render', () => {
@@ -76,32 +83,25 @@ describe('Login', () => {
 
     describe('Username input', () => {
       it('should warn user if characters are more than 0 and less than 3', () => {
-
+          // TODO
       });
 
       
       it('should clear warning characters are 0 or greater than 3', () => {
-
+        // TODO
       });
     })
 
     describe('Password input', () => {
-      it('should contain a password label', () => {
-
-      });
-
-      it('should contain a password input', () => {
-
-      });
-
       it('should warn user if characters are less than 3', () => {
-
+        // TODO
       });
     });
 
     describe('Sign in btn', () => {
       it('should be disabled until username and password field are valid', () => {
-          // TODO
+        const signInBtn = testComponent.find("#signInBtn");
+        expect(signInBtn.at(0).prop("disabled")).toBe(true)
       });
 
       it('should enable when username and password field are valid', () => {
