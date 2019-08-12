@@ -12,7 +12,7 @@ export default class Login extends React.Component {
             username: undefined,
             hasValidUsername: false,
             pressedSkip: false,
-            pressedSignin: false,
+            pressedSignin: false
         }
     }
 

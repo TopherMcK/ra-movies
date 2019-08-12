@@ -36,17 +36,6 @@ describe('Login', () => {
           expect(loginWrapperCount).toBe(expectedLoginWrapperCount);
       });
 
-      it('should contain a title', () => {
-        const loginTitleList = testComponent.find('#loginTitle');
-
-        const expectedLoginTitleCount = 1;
-        const loginTitleCount = loginTitleList.length;
-        expect(loginTitleCount).toBe(expectedLoginTitleCount);
-
-        const expectedText = "Sign In";
-        expect(loginTitleList.at(0).prop('children')).toEqual(expectedText);
-      });
-
       it('should contain a username section', () => {
         const usernameWrapper = testComponent.find('#usernameWrapper');
 
@@ -78,7 +67,7 @@ describe('Login', () => {
       });
 
       it('should contain a button section', () => {
-        const buttons = testComponent.find('Button');
+        const buttons = testComponent.find('#buttonsWrapper > ButtonScaler');
         const orTxt = testComponent.find('#buttonsWrapper > Text');
         expect(buttons.length).toBe(2);
         expect(orTxt.at(0).prop('children')).toEqual('- or -');

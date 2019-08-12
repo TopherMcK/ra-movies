@@ -45,7 +45,7 @@ describe('NavBar', () => {
 
     describe('shouldShowSearch false', () => {
         it('should render logo', () => {
-            expectedSrcUri.testUri = '../../../assets/logo.jpg';
+            expectedSrcUri.testUri = '../../../assets/logo.png';
             expect(testComponent.find('#logo').props().source).toEqual(expectedSrcUri);
         });
     
