@@ -20,7 +20,9 @@ const BottomTabNavigation = createBottomTabNavigator({
                 return (<Image source={require("./assets/home.png")} style={{tintColor: highlight}} />)
             },
             tabBarOptions: {showIcon: true, showLabel: false, style: {
-                backgroundColor: blockbusterBlue
+                backgroundColor: blockbusterBlue,
+                borderTopColor: blockbusterYellow,
+                borderTopWidth: 5,
             }},
         }
     },
@@ -33,7 +35,9 @@ const BottomTabNavigation = createBottomTabNavigator({
                 return (<Image source={require("./assets/trending.png")} style={{tintColor: highlight}} />)
             },
             tabBarOptions: {showIcon: true, showLabel: false, style: {
-                backgroundColor: blockbusterBlue
+                backgroundColor: blockbusterBlue,
+                borderTopColor: blockbusterYellow,
+                borderTopWidth: 5,
             }},
         }
     },
@@ -46,7 +50,9 @@ const BottomTabNavigation = createBottomTabNavigator({
                 return (<Image source={require("./assets/dumpster.png")} style={{tintColor: highlight}} />)
             },
             tabBarOptions: {showIcon: true, showLabel: false, style: {
-                backgroundColor: blockbusterBlue
+                backgroundColor: blockbusterBlue,
+                borderTopColor: blockbusterYellow,
+                borderTopWidth: 5,
             }},
         }
     },
@@ -59,7 +65,9 @@ const BottomTabNavigation = createBottomTabNavigator({
                 return (<Image source={require("./assets/followed.png")} style={{tintColor: highlight}} />)
             },
             tabBarOptions: {showIcon: true, showLabel: false, style: {
-                backgroundColor: blockbusterBlue
+                backgroundColor: blockbusterBlue,
+                borderTopColor: blockbusterYellow,
+                borderTopWidth: 5,
             }},
         }
     },
@@ -72,7 +80,9 @@ const BottomTabNavigation = createBottomTabNavigator({
                 return (<Image source={require("./assets/history.png")} style={{tintColor: highlight}} />)
             },
             tabBarOptions: {showIcon: true, showLabel: false, style: {
-                backgroundColor: blockbusterBlue
+                backgroundColor: blockbusterBlue,
+                borderTopColor: blockbusterYellow,
+                borderTopWidth: 5,
             }},
         }
     }

@@ -8,9 +8,11 @@ const DrawerNav = DrawerNavigator({
   Item1: {
       screen: Routes,
     }
-  }, {
+  },
+  {
     contentComponent: HamburgerMenuView,
-    drawerWidth: Dimensions.get('window').width - 120,  
+    drawerType: 'slide',
+    drawerWidth: Dimensions.get('window').width - 120,
 });
 
 export default class App extends React.Component {
