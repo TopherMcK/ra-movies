@@ -43,13 +43,13 @@ export default class MainView extends React.Component {
         });
 
         searchSuggestionObserver.getSearchSuggestionResults().subscribe((value) => {
-            this.setState({
-                isSearching: true,
-                isLoading: false,
-                hasValidSearchSuggestions: value.hasValidResponse,
-                searchSuggestions: value.results
-            });
-            contentLoadingObserver.sendIsContentLoading(false);
+            // this.setState({
+            //     isSearching: true,
+            //     isLoading: false,
+            //     hasValidSearchSuggestions: value.hasValidResponse,
+            //     searchSuggestions: value.results
+            // });
+            // contentLoadingObserver.sendIsContentLoading(false);
         });
     }
 

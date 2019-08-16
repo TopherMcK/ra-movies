@@ -174,5 +174,52 @@ export const globalStyle = StyleSheet.create({
     MovieListTextContainer: {
         height: 60,
         width: 300,
+    },
+    HomeListTitleLabel: {
+        color: blockbusterBlue,
+        fontWeight: 'bold',
+        fontSize: 20,
+    },
+    HomeListDirectorLabel: {
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 16,
+    },
+    HomeListYearLabel: {
+        color: 'black',
+        fontWeight: 'bold',
+        fontSize: 16,
+    },
+    HomeListItem: {
+        flexDirection: "row",
+        marginVertical: 10, 
+        textAlign: 'center',
+        alignContent: 'center',
+        height: 200,
+        width: '98%',
+        backgroundColor: 'white',
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+        elevation: 4,
+        overflow: "hidden",
+    }, 
+    HomeListRating: {
+        width: 20,
+        height: 20,
+        marginRight: 10,
+    },
+    HomeListPoster: {
+        flex:1, 
+        width: null, 
+        height: null 
+    },
+    HomeListTextContainer: {
+        padding: 10,
     }
 });
