@@ -5,8 +5,10 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00E356F31AD99517003FC87E /* ramoviesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ramoviesTests.m */; };
+		06DEFDBD12BA419994A1051E /* Machine LT.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DED74A2A7A8446968D8A8F3A /* Machine LT.ttf */; };
 		13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
@@ -19,7 +21,6 @@
 		B15C90CBF297AA3D7A032DE2 /* libPods-ramovies-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B36B189562A29FF8FC07968 /* libPods-ramovies-tvOS.a */; };
 		B394D2FC4342A9194DBFEF2A /* libPods-ramovies-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BCD55761F8E0D46F42458E7 /* libPods-ramovies-tvOSTests.a */; };
 		DEAFEE970D01CDAA832B497D /* libPods-ramovies.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF140863A67BD71486D0ED40 /* libPods-ramovies.a */; };
-		C0FCA7B8C4BC4C8D94D735AF /* blockbuster.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2FCDC6BD2FA440B89F9BCEA1 /* blockbuster.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,12 +63,12 @@
 		804AF30D9D5F619B49947886 /* Pods-ramovies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ramovies.debug.xcconfig"; path = "Target Support Files/Pods-ramovies/Pods-ramovies.debug.xcconfig"; sourceTree = "<group>"; };
 		8BCD55761F8E0D46F42458E7 /* libPods-ramovies-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ramovies-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9A4A01FEF57FFAE7F77F9AE6 /* Pods-ramovies-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ramovies-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-ramovies-tvOSTests/Pods-ramovies-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
+		DED74A2A7A8446968D8A8F3A /* Machine LT.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Machine LT.ttf"; path = "../assets/fonts/Machine LT.ttf"; sourceTree = "<group>"; };
 		DF140863A67BD71486D0ED40 /* libPods-ramovies.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ramovies.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E4D704353FBDC6CFF145272C /* Pods-ramovies-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ramovies-tvOS.debug.xcconfig"; path = "Target Support Files/Pods-ramovies-tvOS/Pods-ramovies-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		EFBA38C46C718B632219C16A /* Pods-ramovies-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ramovies-tvOSTests.debug.xcconfig"; path = "Target Support Files/Pods-ramovies-tvOSTests/Pods-ramovies-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
-		2FCDC6BD2FA440B89F9BCEA1 /* blockbuster.ttf */ = {isa = PBXFileReference; name = "blockbuster.ttf"; path = "../assets/fonts/blockbuster.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -165,6 +166,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		82A53B6687204CC881D73BB4 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DED74A2A7A8446968D8A8F3A /* Machine LT.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -198,15 +207,6 @@
 			);
 			name = Products;
 			sourceTree = "<group>";
-		};
-		82A53B6687204CC881D73BB4 /* Resources */ = {
-			isa = "PBXGroup";
-			children = (
-				2FCDC6BD2FA440B89F9BCEA1 /* blockbuster.ttf */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-			path = "";
 		};
 /* End PBXGroup section */
 
@@ -353,7 +353,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				C0FCA7B8C4BC4C8D94D735AF /* blockbuster.ttf in Resources */,
+				06DEFDBD12BA419994A1051E /* Machine LT.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

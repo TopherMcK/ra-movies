@@ -24,13 +24,13 @@ export const globalStyle = StyleSheet.create({
     },
     LoginText: {
         padding: 20,
-        fontFamily: "blockbuster",
+        fontFamily: 'Machine LT',
         fontSize: 15,
         color: blockbusterBlue,
     },
     LoginLabel: {
         alignSelf: 'flex-start',
-        fontFamily: "blockbuster",
+        fontFamily: 'Machine LT',
         fontSize: 15,
         color: blockbusterBlue,
     },
@@ -70,13 +70,13 @@ export const globalStyle = StyleSheet.create({
     },
     LoginButtonText: {
         color: blockbusterYellow,
-        fontFamily: 'blockbuster',
+        fontFamily: 'Machine LT',
         fontSize: 24,
         textAlign: "center",
     },
     LoginButtonTextDisabled: {
         color: blockbusterYellow,
-        fontFamily: 'blockbuster',
+        fontFamily: 'Machine LT',
         fontSize: 24,
         textAlign: "center",
         opacity: 0.5,
@@ -89,7 +89,7 @@ export const globalStyle = StyleSheet.create({
     },
     NavText: {
         color: blockbusterYellow,
-        fontFamily: 'blockbuster',
+        fontFamily: 'Machine LT',
         fontSize: 30,
     },
     NavInputText: {
@@ -128,13 +128,13 @@ export const globalStyle = StyleSheet.create({
         alignItems: "center",
     },
     BurgerUserName: {
-        fontFamily: 'blockbuster',
+        fontFamily: 'Machine LT',
         color: blockbusterYellow,
         fontSize: 30,
         padding: 5,
     },
     BurgerWelcome: {
-        fontFamily: 'blockbuster',
+        fontFamily: 'Machine LT',
         color: blockbusterYellow,
         fontSize: 14,
         padding: 5,
@@ -165,7 +165,7 @@ export const globalStyle = StyleSheet.create({
         borderRadius: 10,
     },
     MovieListText: {
-        fontFamily: 'blockbuster',
+        fontFamily: 'Machine LT',
         color: blockbusterBlue,
         overflow: 'hidden',
         flexWrap: 'nowrap',
