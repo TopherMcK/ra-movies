@@ -97,7 +97,7 @@ export default class HomeTab extends React.Component {
             },
             title: item.Title,
             year: item.Year,
-            imdbRating: item.Ratings[0].Value.split("/")[0] * 10,
+            imdbRating: item.Ratings[0].Value.split("/")[0] / 10,
             rated: item.Rated,
             director: item.Director,
             cast: item.Actors,

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native'
 import { globalStyle } from '../../utils/GlobalStyles';
 
 export default class HomeCell extends React.Component {
@@ -9,7 +9,8 @@ export default class HomeCell extends React.Component {
         this.props = props
 
         this.state  = {
-            titleReady: props.item.Title
+            titleReady: props.item.Title,
+            starWidth: 0
         }
     }
 
@@ -38,6 +39,8 @@ export default class HomeCell extends React.Component {
         }
     }
     showStarImage(ratingValue) {
+        // var imdbRatingPercentage = ratingValue/100;
+        // console.log('Imdb rating: ' + imdbRatingPercentage);
         return require('./../../../assets/stars.png')
     }
 
@@ -58,11 +61,16 @@ export default class HomeCell extends React.Component {
                         <View style={{paddingVertical: 15}}>
                         <Text style={globalStyle.HomeListDirectorLabel}>Cast: <Text style={{fontStyle: 'italic', fontWeight: 'normal'}}>{this.props.item.cast}</Text></Text>
                         </View>
-                        <Image style={globalStyle.HomeListRating} source={this.showStarImage(this.props.item.imdbRating)} />
-                        {/* <Text style={globalStyle.HomeListText}>{this.props.item.imdbRating}</Text> */}
+                        <View style={{width: this.getStarImageWidth(), overflow: 'hidden'}}>
+                            <Image style={{width: 138}} source={this.showStarImage(this.props.item.imdbRating)} />
                         </View>
                     </View>
+                </View>
             </View>
         )
+    }
+
+    getStarImageWidth() {
+        return 138 * this.props.item.imdbRating
     }
 }

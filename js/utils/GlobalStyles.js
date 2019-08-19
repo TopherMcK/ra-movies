@@ -214,6 +214,11 @@ export const globalStyle = StyleSheet.create({
         height: 20,
         marginRight: 10,
     },
+    HomeListStarRating: {
+        width: 138,
+        height: 20,
+        marginRight: 10,
+    },
     HomeListPoster: {
         flex:1, 
         width: null, 
