@@ -29,6 +29,9 @@
   "jest": {
     "preset": "react-native",
     "automock": false,
+    "transformIgnorePatterns": [
+      "node_modules/(?!react-native|react-navigation)/"
+    ],
     "setupFiles": [
       "./setupJest.js"
     ]

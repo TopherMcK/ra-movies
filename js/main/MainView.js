@@ -27,6 +27,7 @@ export default class MainView extends React.Component {
 
     componentDidMount() {
         this.setupSubscriptions();
+        console.log("Main View Nav: " + this.props.navigation.navigate);
     }
 
     setupSubscriptions() {
@@ -65,7 +66,7 @@ export default class MainView extends React.Component {
                 { this.getSearchResultsView() }
             </View>;
         } else {
-            return <BottomTabNavigation/>;
+            return <BottomTabNavigation />;
         }
     }
 

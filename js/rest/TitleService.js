@@ -2,9 +2,9 @@ import { omdbURL, omdbApiKey } from "../utils/AppConstants";
 import { homeResultsObserver } from "../observers/HomeResultsObserver";
 import { contentLoadingObserver } from "../observers/ContenLoadingObserver";
 
-export const homeService = {
+export const titleService = {
 
-    getSearchSuggestionResults(searchParam) {
+    getTitleResult(searchParam) {
         contentLoadingObserver.sendIsContentLoading(true);
         urlRequest = omdbURL + "t=" + searchParam + "&type=movie&apikey=" + omdbApiKey;
         fetch(urlRequest)

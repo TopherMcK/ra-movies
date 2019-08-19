@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, StyleSheet, Text, TextInput, View, TouchableOpacity } from 'react-native';
+import { Image, Text, TextInput, View } from 'react-native';
 import { isValidUsername, isValidPassword } from './LoginValidation';
 import { userDataService } from '../observers/UserDataService';
 import { globalStyle } from '../utils/GlobalStyles';

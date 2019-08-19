@@ -1,16 +1,17 @@
 import React from 'react';
-import { FlatList, View, Text } from 'react-native';
+import { FlatList, View, Text, TouchableOpacity } from 'react-native';
 import { searchService } from '../rest/SearchService';
 import { searchSuggestionObserver } from '../observers/SearchResultsObserver';
 import { activityIndicatorHelper } from '../shared/indicators/ActivityIndicatorHelper'
 import HomeCell from '../shared/cells/HomeCell'
 import { homeResultsObserver } from '../observers/HomeResultsObserver';
-import { homeService } from '../rest/HomeService';
+import BaseTab from './BaseTab';
+import { titleService } from '../rest/TitleService';
 
-export default class HomeTab extends React.Component {
+export default class HomeTab extends BaseTab {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.resultsArray = [];
         this.state = {
             isSearching: false,
@@ -18,12 +19,12 @@ export default class HomeTab extends React.Component {
             hasValidSearchSuggestions: false,
             searchSuggestions: undefined,
             resultsRetrieved: 0,
-            homeResults: [],
-        
+            homeResults: []
         }
     }
 
     componentDidMount() {
+        super.componentDidMount();
         this.setupSubscriptions();
         searchService.getSearchSuggestionResults('Home');
     }
@@ -40,54 +41,47 @@ export default class HomeTab extends React.Component {
         });
 
         homeResultsObserver.getHomeResults().subscribe((value) => {
-            const currentResults = this.state.resultsRetrieved;
-            currentResults[0] = value;
             this.resultsArray.push(value.results);
-            // this.state.resultsRetrieved[this.state.resultsRetrieved] = value
             this.setState({
                 resultsRetrieved: this.state.resultsRetrieved + 1,
-                homeResults: [],
             })
-            // console.log("@@@@ : " + resultsArray);
             
-            if(this.state.resultsRetrieved < 2) {
-            //     const numberRetrieved = this.state.resultsRetrieved
-            //     // const currentResults = this.homeResults
-            //     // currentResults.a
-            //     // console.log("@@@@@@@@@@@@ Current Results: " + currentResults);
-            //     // currentResults[numberRetrieved] = value
-            } else {
-            //     // this.setState({
-            //     //     hasValidSearchSuggestions: true
-            //     // });
+             if(this.state.resultsRetrieved == 10) {
                 this.setState({
-                    hasValidSearchSuggestions: true
+                    hasValidSearchSuggestions: true,
+                    isLoading: false,
                 })
             }
         });
     }
 
-    render() {
-        return (
-            this.showLoadingOrHomeList()
-        );
+    getContentView() {
+        return this.showLoadingOrHomeList();
     }
-
-    
 
     showLoadingOrHomeList() {
         if(this.state.hasValidSearchSuggestions) {
             return  <View>
                      <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
                      <FlatList data={this.resultsArray} renderItem={({ item }) =>
+                     <TouchableOpacity activeOpacity={1} onPressOut={() => this.sendUserToMovieDetail(item.Title)} >
                         <HomeCell item={this.SetupCell(item)} />
+                     </TouchableOpacity>
                      }
                    />
               </View>
         } 
         else {
-            return <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
+            return <Text>Getting Results...</Text>
         }
+    }
+
+    sendUserToMovieDetail(title) {
+        this.getSelectedMovie(title);
+        this.setState({
+            isLoading: false,
+            shouldShowDetailScreen: true
+        })
     }
 
     SetupCell(item) {
@@ -107,7 +101,7 @@ export default class HomeTab extends React.Component {
 
     retrieveHomeMovies() {
         for(movie of this.state.searchSuggestions.Search) {
-            homeService.getSearchSuggestionResults(movie.Title);
+            titleService.getTitleResult(movie.Title);
         }
     }
 }
