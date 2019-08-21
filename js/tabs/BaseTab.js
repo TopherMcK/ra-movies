@@ -3,7 +3,8 @@ import { Text, View } from 'react-native';
 import { activityIndicatorHelper } from '../shared/indicators/ActivityIndicatorHelper';
 import DetailView from '../detail/DetailView';
 import { titleService } from '../rest/TitleService';
-import NavBarView from '../shared/navbar/NavBarView'
+import NavBarView from '../shared/navbar/NavBarView';
+import { contentLoadingObserver } from '../observers/ContenLoadingObserver';
 
 export default class BaseTab extends React.Component {
     static shouldShow = false
@@ -17,6 +18,15 @@ export default class BaseTab extends React.Component {
             detailMovie: {},
         }
     }
+
+    componentDidMount() {
+        contentLoadingObserver.getContentLoadingCheck().subscribe((shouldShowDetailScreen) => {
+            this.setState({
+                preloadedData: false,
+                shouldShowDetailScreen: false
+            });
+        });
+    }    
 
     render() {
         return (

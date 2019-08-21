@@ -24,10 +24,6 @@ export default class NavBar extends React.Component {
         INSTANCE = this
     }
 
-    componentDidMount() {
-
-    }
-
     render() {
         return (
             this.getNavBarView()
@@ -61,7 +57,7 @@ export default class NavBar extends React.Component {
     getMainNavbarView() {
         return <View style={navBarStyles.navWrapper}>
             <Image id="logo" style={globalStyle.NavLogo} source={require("../../../assets/logo.png")} style={globalStyle.NavLogo} />
-            <Text id="username" style={globalStyle.NavText} >{this.getTitleText()}</Text>
+            <Text id="username" adjustsFontSizeToFit={true} ellipsizeMode={"tail"} minimumFontScale={0.05} numberOfLines={1} style={globalStyle.NavText} >{this.getTitleText()}</Text>
             <TouchableOpacity id="navBarSearchBtn" onPress={() => this.setState({shouldShowSearch: true})}>
                 <Image source={require("../../../assets/search_icon.png")} style={globalStyle.NavItem} />
             </TouchableOpacity>

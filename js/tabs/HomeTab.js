@@ -48,7 +48,7 @@ export default class HomeTab extends BaseTab {
             return  <View>
                      <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
                      <FlatList data={this.resultsArray} renderItem={({ item }) =>
-                     <TouchableOpacity activeOpacity={1} onPressOut={() => this.sendUserToMovieDetail(item.Title)} >
+                     <TouchableOpacity activeOpacity={1} onPress={() => this.sendUserToMovieDetail(item.Title)} >
                         <HomeCell item={this.SetupCell(item)} />
                      </TouchableOpacity>
                      }
@@ -61,7 +61,6 @@ export default class HomeTab extends BaseTab {
     }
 
     sendUserToMovieDetail(title) {
-        console.log("Send User to Movie Detail");
         this.getSelectedMovie(title);
         this.setState({
             isLoading: false,
@@ -76,7 +75,7 @@ export default class HomeTab extends BaseTab {
             },
             title: item.Title,
             year: item.Year,
-            imdbRating: item.Ratings[0].Value.split("/")[0] / 10,
+            imdbRating: item.Ratings[0].Value,
             rated: item.Rated,
             director: item.Director,
             cast: item.Actors,

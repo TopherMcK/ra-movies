@@ -4,6 +4,8 @@ import ShallowTestUtil from "../../js/utils/ShallowTestUtil";
 import DetailView from "../../js/detail/DetailView.js";
 import { FlatList, Text } from 'react-native';
 import { render } from 'react-native-testing-library'
+import * as RatingImageUtil from '../../js/utils/RatingImageUtil';
+import { when } from 'jest-when'
 
 describe('DetailView', () => {
     let testComponent;
@@ -14,6 +16,7 @@ describe('DetailView', () => {
     let defaultDirector = "Dan Akroyd"
     let defaultPlot = "AHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH!"
     let movieRating = 'PG-13'
+    let imdbRating = '6.5/10'
 
     let actor1 = "Main Lead"
     let actor2 = "Co Star"
@@ -23,7 +26,10 @@ describe('DetailView', () => {
     var expectedSrcUri = {
         testUri : ""
       }
-    let props
+    let props;
+
+    let getImageForRating;
+    let getStarImageWidth;
     
     beforeAll(() => {
         let shallowTestUtil = new ShallowTestUtil();
@@ -31,6 +37,15 @@ describe('DetailView', () => {
     });
 
     beforeEach(() => {
+        getImageForRating = jest.fn()
+        getStarImageWidth = jest.fn()
+        let ratingImageUtil = {
+            getImageForRating,
+            getStarImageWidth
+        }
+
+        RatingImageUtil.ratingImageUtil = ratingImageUtil
+
         props = {
             detailMovie: {
                 Poster: defaultImgSrc,
@@ -39,7 +54,8 @@ describe('DetailView', () => {
                 Director: defaultDirector,
                 Actors: defaultCast,
                 Plot: defaultPlot,
-                Rating: movieRating
+                Rated: movieRating,
+                ImdbRating: imdbRating
             }
         }
         testComponent = shallow(<DetailView {...props} />);
@@ -95,22 +111,25 @@ describe('DetailView', () => {
         it('should set synopsis from props.detailMovie.Plot', () => {
             let plot = testComponent.find("#plot");
             expect(plot.at(0).prop("children")).toBe(defaultPlot);
+
+            
         });
 
         it('should set rating icon from props.detailMovie.Rating', () => {
-            // let rating = testComponent.find("#rating");
-            props.detailMovie.Rated = "PG-13";
-            testComponent = shallow(<DetailView {...props} />);
             expectedSrcUri.testUri = '../../assets/rated_pg13.png';
-            
-            console.log("What is the testComponent? " + testComponent);
-
-            expect(testComponent.find('#rating').at(0).prop("source")).toEqual(expectedSrcUri);
-            // expect(rating.at(0).prop("source")).toStrictEqual({uri: '../../assets/rated_pg13.png'})
-
-            // expectedSrcUri.testUri = '../../../assets/logo.png';
-            // expect(testComponent.find('#logo').props().source).toEqual(expectedSrcUri);
+            expect(getImageForRating).toBeCalledWith(props.detailMovie.Rated)
         });
+
+        it ('should set star width based on props.detailMovie.ImdbRating', () => {
+            when(getStarImageWidth).calledWith(props.detailMovie.ImdbRating).mockReturnValue(138);
+
+            expectedSrcUri.testUri = "../../../assets/stars.png";
+            let image = testComponent.find("#imdbRating");
+            console.log("What is my image style? " + JSON.stringify(image.props()));
+            expect(image.length).toBe(1);
+            expect(image.props().source).toStrictEqual(expectedSrcUri);
+            expect(getStarImageWidth).toBeCalledWith(props.detailMovie.ImdbRating);
+        })
     });
 
     describe('convertToCastList', () => {

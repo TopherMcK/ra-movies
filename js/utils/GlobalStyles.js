@@ -90,7 +90,9 @@ export const globalStyle = StyleSheet.create({
     NavText: {
         color: blockbusterYellow,
         fontFamily: 'Machine LT',
-        fontSize: 30,
+        fontSize: 24,
+        textAlign: "center",
+        width: '60%'
     },
     NavInputText: {
         backgroundColor: 'white',
@@ -157,6 +159,12 @@ export const globalStyle = StyleSheet.create({
         shadowOpacity: 0.23,
         shadowRadius: 2.62,
         elevation: 4,
+    },
+    MovieLargeImage: {
+        marginHorizontal: 10,
+        width: 120,
+        height: 120,
+        borderRadius: 10,
     }, 
     MovieListImage: {
         marginHorizontal: 10,
@@ -214,6 +222,11 @@ export const globalStyle = StyleSheet.create({
         height: 20,
         marginRight: 10,
     },
+    LargeRating: {
+        width: 40,
+        height: 40,
+        marginRight: 10,
+    },
     HomeListStarRating: {
         width: 138,
         height: 20,
@@ -226,5 +239,66 @@ export const globalStyle = StyleSheet.create({
     },
     HomeListTextContainer: {
         padding: 10,
+    },
+    LargeTitleLabel: {
+        color: blockbusterYellow,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        fontSize: 25,
+        width: '100%',
+        padding: 10,
+    },
+    DetailOverviewItem: {
+        flexDirection: "row",
+        marginBottom: 10, 
+        textAlign: 'center',
+        alignContent: 'center',
+        width: '90%',
+        height: 300,
+        overflow: "hidden",
+        paddingVertical: 10
+    },
+    DetailPoster: {
+        margin: 0,
+        flex: 1,
+        
+    },
+    DetailPosterWrapper: {
+        marginRight: 10,
+        flex: 1,
+        backgroundColor: 'white',
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 6,
+        },
+        shadowOpacity: 1,
+        shadowRadius: 6,
+        elevation: 5,
+    },
+    DetailSummary: {
+        flex: 1,
+        padding: 20,
+        lineHeight: 25,
+        marginBottom: 20, 
+        textAlign: 'left',
+        fontSize: 20,
+        width: '90%',
+        backgroundColor: 'white',
+        borderRadius: 10,
+        shadowColor: "#000",
+        shadowOffset: {
+            width: 0,
+            height: 2,
+        },
+        shadowOpacity: 0.23,
+        shadowRadius: 2.62,
+        elevation: 4,
+        overflow: "hidden",
+    },
+    DetailInfoWrapper: {
+        // backgroundColor: 'pink',
+        flex: 1,
+
     }
 });
