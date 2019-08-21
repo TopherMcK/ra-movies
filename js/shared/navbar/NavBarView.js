@@ -4,9 +4,9 @@ import { defaultUsername } from '../../utils/AppConstants';
 import { searchService } from '../../rest/SearchService';
 import  { globalStyle } from '../../utils/GlobalStyles';
 import { userDataUtil } from '../../utils/UserDataUtil';
-import { navigationObserver } from '../../observers/NavigationObserver'
 
 export default class NavBar extends React.Component {
+    static INSTANCE
 
     constructor(props) {
         super(props);
@@ -17,8 +17,15 @@ export default class NavBar extends React.Component {
             shouldShowSearch: false,
             shouldShowMenu: false,
             isGuest: navigation.getParam('isGuest', true),
-            username: navigation.getParam('username', 'Guest')
+            username: navigation.getParam('username', 'Guest'),
+            movieTitle: null
         }
+
+        INSTANCE = this
+    }
+
+    componentDidMount() {
+
     }
 
     render() {
@@ -54,11 +61,15 @@ export default class NavBar extends React.Component {
     getMainNavbarView() {
         return <View style={navBarStyles.navWrapper}>
             <Image id="logo" style={globalStyle.NavLogo} source={require("../../../assets/logo.png")} style={globalStyle.NavLogo} />
-            <Text id="username" style={globalStyle.NavText} >{userDataUtil.getDisplayUsername(this.getUsername())}</Text>
+            <Text id="username" style={globalStyle.NavText} >{this.getTitleText()}</Text>
             <TouchableOpacity id="navBarSearchBtn" onPress={() => this.setState({shouldShowSearch: true})}>
                 <Image source={require("../../../assets/search_icon.png")} style={globalStyle.NavItem} />
             </TouchableOpacity>
         </View>;
+    }
+
+    getTitleText() {
+        return this.state.movieTitle === null ? userDataUtil.getDisplayUsername(this.getUsername()) : this.state.movieTitle
     }
 
     getUsername() {
@@ -75,7 +86,15 @@ export default class NavBar extends React.Component {
 
     onBackArrowPressed() {
         this.setState({shouldShowSearch: false});
-        navigationObserver.sendDestination("Home");
+        // navigationObserver.sendDestination("Home");
+    }
+
+    static updateNavbarTitle(newTitle) {
+        console.log("Switch title to " + newTitle);
+
+        INSTANCE.setState({
+                movieTitle: newTitle
+        })
     }
 }
 

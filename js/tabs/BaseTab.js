@@ -1,12 +1,12 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { contentLoadingObserver } from '../observers/ContenLoadingObserver';
 import { activityIndicatorHelper } from '../shared/indicators/ActivityIndicatorHelper';
 import DetailView from '../detail/DetailView';
-import { homeResultsObserver } from '../observers/HomeResultsObserver';
 import { titleService } from '../rest/TitleService';
+import NavBarView from '../shared/navbar/NavBarView'
 
 export default class BaseTab extends React.Component {
+    static shouldShow = false
 
     constructor() {
         super();
@@ -16,23 +16,6 @@ export default class BaseTab extends React.Component {
             shouldShowDetailScreen: false,
             detailMovie: {},
         }
-    }
-
-    componentDidMount() {
-        homeResultsObserver.getHomeResults().subscribe((value) => {
-            if(this.state.shouldShowDetailScreen) {
-                this.setState({
-                    detailMovie: value.results,
-                    isLoading: false,
-                    preloadedData: true,
-                })
-            }
-        })
-        contentLoadingObserver.getContentLoadingCheck().subscribe((isLoading) => {
-            this.setState({
-                isLoading: isLoading
-            })
-        });
     }
 
     render() {
@@ -65,6 +48,15 @@ export default class BaseTab extends React.Component {
     }
 
     getSelectedMovie(title) {
-        titleService.getTitleResult(title);
+        titleService.getTitleResult(title).then((response) => {
+            if(this.state.shouldShowDetailScreen) {
+                this.setState({
+                    detailMovie: response,
+                    isLoading: false,
+                    preloadedData: true,
+                })
+                NavBarView.updateNavbarTitle(response.Title)
+            }
+        });
     }
 }

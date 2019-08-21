@@ -4,5 +4,6 @@ const subject = new Subject();
 
 export const homeResultsObserver = {
     sendHomeResults: (hasValidResponse, results) => subject.next({ hasValidResponse: hasValidResponse, results: results }),
-    getHomeResults: () => subject.asObservable()
+    getHomeResults: () => subject.asObservable(),
+    unsubscribe: () => subject.unsubscribe()
 };

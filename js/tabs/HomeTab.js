@@ -1,14 +1,15 @@
 import React from 'react';
 import { FlatList, View, Text, TouchableOpacity } from 'react-native';
 import { searchService } from '../rest/SearchService';
-import { searchSuggestionObserver } from '../observers/SearchResultsObserver';
 import { activityIndicatorHelper } from '../shared/indicators/ActivityIndicatorHelper'
 import HomeCell from '../shared/cells/HomeCell'
-import { homeResultsObserver } from '../observers/HomeResultsObserver';
 import BaseTab from './BaseTab';
 import { titleService } from '../rest/TitleService';
 
 export default class HomeTab extends BaseTab {
+    homeSubscription = null
+    resultsRetrieved = 0
+    searchSuggestions = {}
 
     constructor(props) {
         super(props);
@@ -17,42 +18,25 @@ export default class HomeTab extends BaseTab {
             isSearching: false,
             isLoading: true,
             hasValidSearchSuggestions: false,
-            searchSuggestions: undefined,
-            resultsRetrieved: 0,
-            homeResults: []
         }
     }
 
     componentDidMount() {
         super.componentDidMount();
-        this.setupSubscriptions();
-        searchService.getSearchSuggestionResults('Home');
-    }
-
-    setupSubscriptions() {
-
-        searchSuggestionObserver.getSearchSuggestionResults().subscribe((value) => {
-            this.setState({
-                isSearching: true,
-                isLoading: false,
-                searchSuggestions: value.results
-            });
-            this.retrieveHomeMovies();
-        });
-
-        homeResultsObserver.getHomeResults().subscribe((value) => {
-            this.resultsArray.push(value.results);
-            this.setState({
-                resultsRetrieved: this.state.resultsRetrieved + 1,
-            })
-            
-             if(this.state.resultsRetrieved == 10) {
-                this.setState({
-                    hasValidSearchSuggestions: true,
-                    isLoading: false,
-                })
+        searchService.getSearchSuggestionResults('Home').then((response) => {
+            this.searchSuggestions = response
+            if(response != null && response.Search != null && response.Search.length > 0) {
+                this.retrieveHomeMovies(response.Search[0].Title);
             }
         });
+    }
+
+    componentWillUnmount() {
+        if (homeSubscription!= null) {
+            console.log("" + homeSubscription);
+            homeSubscription.unsubscribe()
+            homeSubscription = null
+        }
     }
 
     getContentView() {
@@ -77,6 +61,7 @@ export default class HomeTab extends BaseTab {
     }
 
     sendUserToMovieDetail(title) {
+        console.log("Send User to Movie Detail");
         this.getSelectedMovie(title);
         this.setState({
             isLoading: false,
@@ -99,9 +84,23 @@ export default class HomeTab extends BaseTab {
         return Cell;
     }
 
-    retrieveHomeMovies() {
-        for(movie of this.state.searchSuggestions.Search) {
-            titleService.getTitleResult(movie.Title);
-        }
+     retrieveHomeMovies(title) {
+            titleService.getTitleResult(title).then((response) => {
+                this.handleHomeMovieResponse(response);
+            });
+    }
+
+    handleHomeMovieResponse(response) {
+                this.resultsRetrieved++
+                this.resultsArray.push(response)
+            
+                if(this.resultsRetrieved < 10 && this.searchSuggestions.Search.length > this.resultsRetrieved && this.searchSuggestions.Search[this.resultsRetrieved].Title != undefined) {
+                    this.retrieveHomeMovies(this.searchSuggestions.Search[this.resultsRetrieved].Title);
+                } else {
+                    this.setState({
+                        hasValidSearchSuggestions: true,
+                        isLoading: false,
+                    })
+                }
     }
 }
