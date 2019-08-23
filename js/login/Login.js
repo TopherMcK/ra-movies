@@ -12,7 +12,9 @@ export default class Login extends React.Component {
             username: undefined,
             hasValidUsername: false,
             pressedSkip: false,
-            pressedSignin: false
+            pressedSignin: false,
+            hasUsernameError: false,
+            hasPasswordError: false
         }
     }
 
@@ -28,11 +30,17 @@ export default class Login extends React.Component {
                 <View id="contentView" style={globalStyle.LoginContentView}>
                 <Image id="storefrontImg" style={globalStyle.LoginLogo} source={require('../../assets/main_logo.png')} />
                 <View id="usernameWrapper" style={globalStyle.LoginGroup}>
-                    <Text id="usernameLabel" style={globalStyle.LoginLabel}>User Name</Text>
+                    <View style={{flexDirection: "row"}} >
+                        <Text id="usernameLabel" style={globalStyle.LoginLabel}>User Name</Text>
+                        <Text style={globalStyle.InputWarning} id="usernameWarning">{this.getUsernameWarning()}</Text>
+                    </View>
                     <TextInput id="usernameTextInput" style={globalStyle.InputField} onChangeText={(value) => this.onUNInput(value)}></TextInput>
                 </View>
                 <View id="passwordWrapper" style={globalStyle.LoginGroup}>
-                    <Text id="passwordLabel" style={globalStyle.LoginLabel}>Password</Text>
+                    <View style={{flexDirection: "row"}} >
+                        <Text id="passwordLabel" style={globalStyle.LoginLabel}>Password</Text>
+                        <Text style={globalStyle.InputWarning} id="passwordWarning">{this.getPasswordWarning()}</Text>
+                    </View>
                     <TextInput id="passwordTextInput" style={globalStyle.InputField} autoCompleteType="password" onChangeText={(value) => this.onPasswordInput(value)}></TextInput>
                 </View>
                 <View id="buttonsWrapper" style={globalStyle.LoginGroup}>
@@ -52,17 +60,32 @@ export default class Login extends React.Component {
     }
 
     onUNInput(usernameInput) {
-       this.setState({hasValidUsername : isValidUsername(usernameInput.trim())});
-       
-        if (this.state.hasValidUsername) {
-            this.setState({username : usernameInput});
-        } else if(this.state.username !== undefined) {
-            this.setState({username : undefined});
+        const hasValidUsername = isValidUsername(usernameInput.trim());
+        let hasUsernameError = false;
+
+        if(!hasValidUsername) {
+            if(usernameInput) {
+                hasUsernameError = true;
+            }
+            if(this.state.username !== undefined) {
+                usernameInput = undefined;
+            }
         }
+
+       this.setState({
+           hasValidUsername: hasValidUsername,
+           hasUsernameError: hasUsernameError,
+           username: usernameInput
+        });
     }
 
     onPasswordInput(passwordInput) {
-        this.setState({hasValidPassword : isValidPassword(passwordInput)});
+        const hasValidPassword = isValidPassword(passwordInput);
+        let hasPasswordError = (!hasValidPassword && passwordInput);
+        this.setState({
+            hasValidPassword: hasValidPassword,
+            hasPasswordError: hasPasswordError
+        });
     }
 
     shouldEnableLoginBtn() {
@@ -73,5 +96,20 @@ export default class Login extends React.Component {
         const username = isGuest ? undefined : this.state.username.trim();
         userDataService.sendUserData(username, isGuest);
         this.props.navigation.navigate('MainRT', {isGuest: isGuest, username: username});
+    }
+
+    getUsernameWarning() {
+        if(this.state.hasUsernameError) {
+            return "Invalid Username"
+        } else {
+            return null
+        }
+    }
+    getPasswordWarning() {
+        if(this.state.hasPasswordError) {
+            return "Invalid Password"
+        } else {
+            return null
+        }
     }
 }

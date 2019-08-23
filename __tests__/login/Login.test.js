@@ -83,18 +83,43 @@ describe('Login', () => {
 
     describe('Username input', () => {
       it('should warn user if characters are more than 0 and less than 3', () => {
-          // TODO
+          const usernameTextInput = testComponent.find('#usernameTextInput');
+
+          usernameTextInput.first().props().onChangeText("a");
+
+          const usernameWarning = testComponent.find("#usernameWarning");
+          expect(usernameWarning.prop('children')).toEqual("Invalid Username");
       });
 
       
       it('should clear warning characters are 0 or greater than 3', () => {
-        // TODO
+        const usernameTextInput = testComponent.find('#usernameTextInput');
+
+        usernameTextInput.first().props().onChangeText("a");
+
+        let usernameWarning = testComponent.find("#usernameWarning");
+        expect(usernameWarning.prop('children')).toEqual("Invalid Username");
+
+        usernameTextInput.first().props().onChangeText("abcd");
+
+        usernameWarning = testComponent.find("#usernameWarning");
+        expect(usernameWarning.prop('children')).toEqual(null);
       });
     })
 
     describe('Password input', () => {
       it('should warn user if characters are less than 3', () => {
-        // TODO
+        const passwordTextInput = testComponent.find('#passwordTextInput');
+
+        passwordTextInput.first().props().onChangeText("a");
+
+        let passwordWarning = testComponent.find("#passwordWarning");
+        expect(passwordWarning.prop('children')).toEqual("Invalid Password");
+
+        passwordTextInput.first().props().onChangeText("abcd");
+
+        passwordWarning = testComponent.find("#passwordWarning");
+        expect(passwordWarning.prop('children')).toEqual(null);
       });
     });
 
@@ -105,11 +130,13 @@ describe('Login', () => {
       });
 
       it('should enable when username and password field are valid', () => {
-        // TODO
-      });
+        testComponent.instance().setState({
+          hasValidPassword: true ,hasValidUsername: true
+        })
 
-      it('should pass a username prop from username field when clicked', () => {
 
+        const signInBtn = testComponent.find("#signInBtn");
+        expect(signInBtn.at(0).prop("disabled")).toBe(false)
       });
     })
 

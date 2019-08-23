@@ -33,6 +33,8 @@ export const globalStyle = StyleSheet.create({
         fontFamily: 'Machine LT',
         fontSize: 15,
         color: blockbusterBlue,
+        marginRight: "auto",
+        width: 100
     },
     LoginButton: {
         backgroundColor: blockbusterBlue,
@@ -221,5 +223,11 @@ export const globalStyle = StyleSheet.create({
     },
     HomeListTextContainer: {
         padding: 10,
+    },
+    InputWarning: {
+        width: 100,
+        fontSize: 12,
+        textAlign: "right" ,
+        color: "#e91e63"
     }
 });
