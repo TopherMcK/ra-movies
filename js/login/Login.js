@@ -31,7 +31,7 @@ export default class Login extends React.Component {
                 userDataService.sendUserData(username, isGuest);
                 this.props.navigation.navigate('MainRT', {isGuest: isGuest, username: username});
             } catch (e) {
-                alert("We had an error: " + e.message);
+                alert(e.message);
             }
         } else {
             this.props.navigation.navigate('MainRT', {isGuest: isGuest, username: username});

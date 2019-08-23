@@ -28,12 +28,13 @@ target 'ramovies' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+  pod 'Firebase/Auth'
 # Add the pods for the Firebase products you want to use in your app
 # For example, to use Firebase Authentication and Cloud Firestore
-pod 'Firebase/Auth'
-pod 'Firebase/Firestore'
+# pod 'Firebase/Auth'
+# pod 'Firebase/Firestore'
 
-  pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
+# pod 'RNFirebase', :path => '../node_modules/react-native-firebase'
 
   target 'ramoviesTests' do
     inherit! :search_paths
