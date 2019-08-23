@@ -1,4 +1,4 @@
-package com.ramovies;
+package com.learningteam.ramovies;
 
 import android.app.Application;
 import android.util.Log;

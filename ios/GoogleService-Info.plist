@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>925276240313-4d99i168c8ct9uvrdsuntpkogv2lmf6e.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.925276240313-4d99i168c8ct9uvrdsuntpkogv2lmf6e</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBn3f5PYPFl0QReWQiFhRypuTiCMCQSTWY</string>
+	<key>GCM_SENDER_ID</key>
+	<string>925276240313</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.learningteam.ramovies</string>
+	<key>PROJECT_ID</key>
+	<string>ramovies-52ad8</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ramovies-52ad8.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:925276240313:ios:25efd21a242b144f</string>
+	<key>DATABASE_URL</key>
+	<string>https://ramovies-52ad8.firebaseio.com</string>
+</dict>
+</plist>

@@ -128,7 +128,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.ramovies"
+        applicationId "com.learningteam.ramovies"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -190,6 +190,8 @@ android {
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
+
+    implementation 'com.google.firebase:firebase-auth:19.0.0'
 
     if (enableHermes) {
       def hermesPath = "../../node_modules/hermesvm/android/";

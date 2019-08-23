@@ -2,7 +2,7 @@
 export const defaultUsername = "Guest";
 
 // IMDB Dumpster Ids
-export const dumpsterMovies = ['The Lure of the Mask', 'The White Pearl', 'One Hour', 'The Savage Woman', 'The Jungle Trail', 'A Man\'s Fight', 'The Adventurer', 'The Elusive Pimpernel', 'Terror Trail', 'The Torrent', 'Boomerang Bill', 'Kentucky Days', 'Young Lochinvar', 'Wild Justice', 'Back to Liberty', 'The Tigress', 'Racing Luck', 'Love in Exile', 'The Rip-Tide', 'The Struggle'];
+export const dumpsterMovies = ['Street Fighter', 'Double Dragon', 'Mortal Kombat', 'Teenage Mutant Ninja Turtles II: The Secret of the Ooze', 'Into the Sun', 'Super Mario Bros', 'Lara Croft: Tomb Raider', 'Doom', 'Sonic the Hedgehog'];
 
 
 // API

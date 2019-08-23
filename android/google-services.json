@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "925276240313",
+    "firebase_url": "https://ramovies-52ad8.firebaseio.com",
+    "project_id": "ramovies-52ad8",
+    "storage_bucket": "ramovies-52ad8.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:925276240313:android:25efd21a242b144f",
+        "android_client_info": {
+          "package_name": "com.learningteam.ramovies"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "925276240313-du9gfe2kt2i75984mb6tqcabc1oqpn7n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATaD9mCNbwuywUB7UPHxPMitPUSkURNpM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "925276240313-du9gfe2kt2i75984mb6tqcabc1oqpn7n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

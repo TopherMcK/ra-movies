@@ -18,6 +18,7 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* ramoviesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ramoviesTests.m */; };
 		43D999A480BE2C2962DCD1E7 /* libPods-ramoviesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E47A569BC07E51AA250D77B /* libPods-ramoviesTests.a */; };
+		5A7A847B23104CF50059E0C0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A7A847A23104CF50059E0C0 /* GoogleService-Info.plist */; };
 		9B7A2876C001F18AFD169936 /* libPods-ramovies.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF140863A67BD71486D0ED40 /* libPods-ramovies.a */; };
 		B15C90CBF297AA3D7A032DE2 /* libPods-ramovies-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B36B189562A29FF8FC07968 /* libPods-ramovies-tvOS.a */; };
 		B394D2FC4342A9194DBFEF2A /* libPods-ramovies-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BCD55761F8E0D46F42458E7 /* libPods-ramovies-tvOSTests.a */; };
@@ -57,6 +58,7 @@
 		2D02E47B1E0B4A5D006451C7 /* ramovies-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ramovies-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* ramovies-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ramovies-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		30EAFEF9740C36689D913F66 /* Pods-ramoviesTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ramoviesTests.debug.xcconfig"; path = "Target Support Files/Pods-ramoviesTests/Pods-ramoviesTests.debug.xcconfig"; sourceTree = "<group>"; };
+		5A7A847A23104CF50059E0C0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		5E47A569BC07E51AA250D77B /* libPods-ramoviesTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ramoviesTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6B36B189562A29FF8FC07968 /* libPods-ramovies-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ramovies-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6C9D12D318951435758B3DA3 /* Pods-ramovies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ramovies.release.xcconfig"; path = "Target Support Files/Pods-ramovies/Pods-ramovies.release.xcconfig"; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 		13B07FAE1A68108700A75B9A /* ramovies */ = {
 			isa = PBXGroup;
 			children = (
+				5A7A847A23104CF50059E0C0 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -240,6 +243,7 @@
 				13B07F8C1A680F5B00A75B9A /* Frameworks */,
 				13B07F8E1A680F5B00A75B9A /* Resources */,
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
+				7DCD8166D1DAB9A7A3A9A033 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -352,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				5A7A847B23104CF50059E0C0 /* GoogleService-Info.plist in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
 				06DEFDBD12BA419994A1051E /* Machine LT.ttf in Resources */,
 			);
@@ -445,6 +450,24 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7DCD8166D1DAB9A7A3A9A033 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ramovies/Pods-ramovies-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/gRPC-C++/gRPCCertificates-Cpp.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Cpp.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ramovies/Pods-ramovies-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		BDF4EC22CC5F677F466823FF /* [CP] Check Pods Manifest.lock */ = {
@@ -654,7 +677,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.learningteam.ramovies;
 				PRODUCT_NAME = ramovies;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -677,7 +700,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.learningteam.ramovies;
 				PRODUCT_NAME = ramovies;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				VERSIONING_SYSTEM = "apple-generic";
