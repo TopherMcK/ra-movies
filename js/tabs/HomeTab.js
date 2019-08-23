@@ -1,93 +1,70 @@
 import React from 'react';
-import { FlatList, View, Text } from 'react-native';
+import { FlatList, View, Text, TouchableOpacity } from 'react-native';
 import { searchService } from '../rest/SearchService';
-import { searchSuggestionObserver } from '../observers/SearchResultsObserver';
 import { activityIndicatorHelper } from '../shared/indicators/ActivityIndicatorHelper'
 import HomeCell from '../shared/cells/HomeCell'
-import { homeResultsObserver } from '../observers/HomeResultsObserver';
-import { homeService } from '../rest/HomeService';
+import BaseTab from './BaseTab';
+import { titleService } from '../rest/TitleService';
 
-export default class HomeTab extends React.Component {
+export default class HomeTab extends BaseTab {
+    homeSubscription = null
+    resultsRetrieved = 0
+    searchSuggestions = {}
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
         this.resultsArray = [];
         this.state = {
             isSearching: false,
             isLoading: true,
             hasValidSearchSuggestions: false,
-            searchSuggestions: undefined,
-            resultsRetrieved: 0,
-            homeResults: [],
-        
         }
     }
 
     componentDidMount() {
-        this.setupSubscriptions();
-        searchService.getSearchSuggestionResults('Home');
-    }
-
-    setupSubscriptions() {
-
-        searchSuggestionObserver.getSearchSuggestionResults().subscribe((value) => {
-            this.setState({
-                isSearching: true,
-                isLoading: false,
-                searchSuggestions: value.results
-            });
-            this.retrieveHomeMovies();
-        });
-
-        homeResultsObserver.getHomeResults().subscribe((value) => {
-            const currentResults = this.state.resultsRetrieved;
-            currentResults[0] = value;
-            this.resultsArray.push(value.results);
-            // this.state.resultsRetrieved[this.state.resultsRetrieved] = value
-            this.setState({
-                resultsRetrieved: this.state.resultsRetrieved + 1,
-                homeResults: [],
-            })
-            // console.log("@@@@ : " + resultsArray);
-            
-            if(this.state.resultsRetrieved < 2) {
-            //     const numberRetrieved = this.state.resultsRetrieved
-            //     // const currentResults = this.homeResults
-            //     // currentResults.a
-            //     // console.log("@@@@@@@@@@@@ Current Results: " + currentResults);
-            //     // currentResults[numberRetrieved] = value
-            } else {
-            //     // this.setState({
-            //     //     hasValidSearchSuggestions: true
-            //     // });
-                this.setState({
-                    hasValidSearchSuggestions: true
-                })
+        super.componentDidMount();
+        searchService.getSearchSuggestionResults('Home').then((response) => {
+            this.searchSuggestions = response
+            if(response != null && response.Search != null && response.Search.length > 0) {
+                this.retrieveHomeMovies(response.Search[0].Title);
             }
         });
     }
 
-    render() {
-        return (
-            this.showLoadingOrHomeList()
-        );
+    componentWillUnmount() {
+        if (homeSubscription!= null) {
+            homeSubscription.unsubscribe()
+            homeSubscription = null
+        }
     }
 
-    
+    getContentView() {
+        return this.showLoadingOrHomeList();
+    }
 
     showLoadingOrHomeList() {
         if(this.state.hasValidSearchSuggestions) {
             return  <View>
                      <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
                      <FlatList data={this.resultsArray} renderItem={({ item }) =>
+                     <TouchableOpacity activeOpacity={1} onPress={() => this.sendUserToMovieDetail(item.Title)} >
                         <HomeCell item={this.SetupCell(item)} />
+                     </TouchableOpacity>
                      }
                    />
               </View>
         } 
         else {
-            return <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
+            return <Text>Getting Results...</Text>
         }
+    }
+
+    sendUserToMovieDetail(title) {
+        this.getSelectedMovie(title);
+        this.setState({
+            isLoading: false,
+            shouldShowDetailScreen: true
+        })
     }
 
     SetupCell(item) {
@@ -97,7 +74,7 @@ export default class HomeTab extends React.Component {
             },
             title: item.Title,
             year: item.Year,
-            imdbRating: item.Ratings[0].Value.split("/")[0] * 10,
+            imdbRating: item.imdbRating,
             rated: item.Rated,
             director: item.Director,
             cast: item.Actors,
@@ -105,9 +82,23 @@ export default class HomeTab extends React.Component {
         return Cell;
     }
 
-    retrieveHomeMovies() {
-        for(movie of this.state.searchSuggestions.Search) {
-            homeService.getSearchSuggestionResults(movie.Title);
-        }
+     retrieveHomeMovies(title) {
+            titleService.getTitleResult(title).then((response) => {
+                this.handleHomeMovieResponse(response);
+            });
+    }
+
+    handleHomeMovieResponse(response) {
+                this.resultsRetrieved++
+                this.resultsArray.push(response)
+            
+                if(this.resultsRetrieved < 10 && this.searchSuggestions.Search.length > this.resultsRetrieved && this.searchSuggestions.Search[this.resultsRetrieved].Title != undefined) {
+                    this.retrieveHomeMovies(this.searchSuggestions.Search[this.resultsRetrieved].Title);
+                } else {
+                    this.setState({
+                        hasValidSearchSuggestions: true,
+                        isLoading: false,
+                    })
+                }
     }
 }

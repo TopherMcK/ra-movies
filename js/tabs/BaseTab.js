@@ -1,35 +1,73 @@
 import React from 'react';
 import { Text, View } from 'react-native';
-import { contentLoadingObserver } from '../observers/ContenLoadingObserver'
 import { activityIndicatorHelper } from '../shared/indicators/ActivityIndicatorHelper';
+import DetailView from '../detail/DetailView';
+import { titleService } from '../rest/TitleService';
+import NavBarView from '../shared/navbar/NavBarView';
+import { contentLoadingObserver } from '../observers/ContenLoadingObserver';
+import { ratingImageUtil } from '../utils/RatingImageUtil';
 
 export default class BaseTab extends React.Component {
+    static shouldShow = false
 
     constructor() {
         super();
         this.state = {
-            isLoading: false
+            preloadedData: false,
+            isLoading: false,
+            shouldShowDetailScreen: false,
+            detailMovie: {},
         }
     }
 
     componentDidMount() {
-        contentLoadingObserver.getContentLoadingCheck().subscribe((isLoading) => {
+        contentLoadingObserver.getContentLoadingCheck().subscribe((shouldShowDetailScreen) => {
             this.setState({
-                isLoading: isLoading
-            })
+                preloadedData: false,
+                shouldShowDetailScreen: false
+            });
         });
-    }
+    }    
 
     render() {
         return (
             <View>
                 {activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}
-                {this.getTabContentView()}
+                {this.showDetailOrContentView()}
             </View>
         );
     }
 
-    getTabContentView(){
+    getTabContentView() {
         return <Text>You mest override getTabContentView from BaseTab!</Text>;
+    }
+
+    showDetailOrContentView() {
+        if(this.state.preloadedData) {
+            return this.getDetailView()
+        } else {
+            return this.getContentView()
+        }
+    }
+
+    getDetailView() {
+        return <DetailView detailMovie={this.state.detailMovie}/>
+    }
+
+    getContentView() {
+        return null
+    }
+
+    getSelectedMovie(title) {
+        titleService.getTitleResult(title).then((response) => {
+            if(this.state.shouldShowDetailScreen) {
+                this.setState({
+                    detailMovie: response,
+                    isLoading: false,
+                    preloadedData: true,
+                })
+                NavBarView.updateNavbarTitle(response.Title)
+            }
+        });
     }
 }

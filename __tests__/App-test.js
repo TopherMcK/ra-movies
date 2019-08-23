@@ -1,14 +1,17 @@
-/**
- * @format
- */
-
-import 'react-native';
 import React from 'react';
 import App from '../App';
+import {shallow} from 'enzyme';
+import ShallowTestUtil from "../js/utils/ShallowTestUtil";
 
-// Note: test renderer must be required after react-native.
-import renderer from 'react-test-renderer';
+describe('App', () => {
 
-it('renders correctly', () => {
-  renderer.create(<App />);
+    beforeAll(() => {
+      let shallowTestUtil = new ShallowTestUtil();
+      shallowTestUtil.prepTest();
+    });
+
+    it('should render', () => {
+        var app = shallow(<App />);
+        expect(app).toBeTruthy();
+    });
 });

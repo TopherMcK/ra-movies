@@ -18,9 +18,9 @@
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* ramoviesTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* ramoviesTests.m */; };
 		43D999A480BE2C2962DCD1E7 /* libPods-ramoviesTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E47A569BC07E51AA250D77B /* libPods-ramoviesTests.a */; };
+		9B7A2876C001F18AFD169936 /* libPods-ramovies.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF140863A67BD71486D0ED40 /* libPods-ramovies.a */; };
 		B15C90CBF297AA3D7A032DE2 /* libPods-ramovies-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6B36B189562A29FF8FC07968 /* libPods-ramovies-tvOS.a */; };
 		B394D2FC4342A9194DBFEF2A /* libPods-ramovies-tvOSTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 8BCD55761F8E0D46F42458E7 /* libPods-ramovies-tvOSTests.a */; };
-		DEAFEE970D01CDAA832B497D /* libPods-ramovies.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DF140863A67BD71486D0ED40 /* libPods-ramovies.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,7 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DEAFEE970D01CDAA832B497D /* libPods-ramovies.a in Frameworks */,
+				9B7A2876C001F18AFD169936 /* libPods-ramovies.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -387,7 +387,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh";
+			shellScript = "export NODE_BINARY=node\n../node_modules/react-native/scripts/react-native-xcode.sh\n";
 		};
 		1288A35F967B9DC9DAA4F2E1 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;

@@ -4,5 +4,6 @@ const subject = new Subject();
 
 export const navigationObserver = {
     sendDestination: (destination) => subject.next({destination: destination}),
-    getDestination: () => subject.asObservable()
+    getDestination: () => subject.asObservable(),
+    unsubscribe: () => subject.unsubscribe()
 };

@@ -65,15 +65,13 @@ export default class MainView extends React.Component {
                 { this.getSearchResultsView() }
             </View>;
         } else {
-            return <BottomTabNavigation/>;
+            return <BottomTabNavigation />;
         }
     }
 
     getSearchResultsView() {
         if(this.state.hasValidSearchSuggestions) {
             const searchResult = this.state.searchSuggestions
-            console.log("Search Suggestions: " + JSON.stringify(this.state.searchSuggestions));
-
             return <View>
             <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
             <FlatList data={searchResult.Search} renderItem={({ item }) =>

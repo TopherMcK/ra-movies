@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import { Animated, TouchableOpacity, } from "react-native";
 
 export class ButtonScaler extends React.Component {
@@ -60,20 +59,6 @@ export class ButtonScaler extends React.Component {
         }
     }
 }
-
-// ButtonScaler.propTypes = {
-//     ...TouchableOpacity.propTypes,
-//     style: Animated.View.propTypes.style,
-//     defaultScale: PropTypes.number.isRequired,
-//     activeScale: PropTypes.number.isRequired,
-//     tension: PropTypes.number.isRequired,
-//     friction: PropTypes.number.isRequired,
-//     pressInTension: PropTypes.number,
-//     pressInFriction: PropTypes.number,
-//     pressOutTension: PropTypes.number,
-//     pressOutFriction: PropTypes.number,
-//     useNativeDriver: PropTypes.bool,
-// };
 
 ButtonScaler.defaultProps = {
     defaultScale: 1,
