@@ -4,6 +4,7 @@ import { isValidUsername, isValidPassword } from './LoginValidation';
 import { userDataService } from '../observers/UserDataService';
 import { globalStyle } from '../utils/GlobalStyles';
 import { ButtonScaler } from '../utils/ButtonScaler';
+import {auth} from 'react-native-firebase';
 
 export default class Login extends React.Component {
     constructor() {
@@ -21,6 +22,18 @@ export default class Login extends React.Component {
     static navigationOptions = {
         header: null
     };
+
+    componentDidMount() {
+        this.register("quintin.rodriguez-harrison@wwt.com", "Chris123");
+    }
+
+    async register(email, password) {
+        try {
+            await auth().createUserWithEmailAndPassword(email, password);
+        } catch (e) {
+            console.error(e.message);
+        }
+    }
 
     render() {
         return (
