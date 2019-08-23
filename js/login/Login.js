@@ -23,15 +23,26 @@ export default class Login extends React.Component {
         header: null
     };
 
-    componentDidMount() {
-        this.register("quintin.rodriguez-harrison@wwt.com", "Chris123");
+    async login(email, password, isGuest) {
+        const username = isGuest ? undefined : this.state.username.trim();
+        if (!isGuest) {
+            try {
+                const authResponse = await auth().signInWithEmailAndPassword(email, password);
+                userDataService.sendUserData(username, isGuest);
+                this.props.navigation.navigate('MainRT', {isGuest: isGuest, username: username});
+            } catch (e) {
+                alert("We had an error: " + e.message);
+            }
+        } else {
+            this.props.navigation.navigate('MainRT', {isGuest: isGuest, username: username});
+        }
     }
 
     async register(email, password) {
         try {
             await auth().createUserWithEmailAndPassword(email, password);
         } catch (e) {
-            console.error(e.message);
+            console.log(e.message);
         }
     }
 
@@ -96,6 +107,7 @@ export default class Login extends React.Component {
         const hasValidPassword = isValidPassword(passwordInput);
         let hasPasswordError = (!hasValidPassword && passwordInput);
         this.setState({
+            password: passwordInput,
             hasValidPassword: hasValidPassword,
             hasPasswordError: hasPasswordError
         });
@@ -106,9 +118,7 @@ export default class Login extends React.Component {
     }
 
     onLoginBtnPressed(isGuest) {
-        const username = isGuest ? undefined : this.state.username.trim();
-        userDataService.sendUserData(username, isGuest);
-        this.props.navigation.navigate('MainRT', {isGuest: isGuest, username: username});
+        this.login(this.state.username, this.state.password, isGuest);
     }
 
     getUsernameWarning() {
