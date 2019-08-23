@@ -33,7 +33,6 @@ export default class HomeTab extends BaseTab {
 
     componentWillUnmount() {
         if (homeSubscription!= null) {
-            console.log("" + homeSubscription);
             homeSubscription.unsubscribe()
             homeSubscription = null
         }
@@ -75,7 +74,7 @@ export default class HomeTab extends BaseTab {
             },
             title: item.Title,
             year: item.Year,
-            imdbRating: item.Ratings[0].Value,
+            imdbRating: item.imdbRating,
             rated: item.Rated,
             director: item.Director,
             cast: item.Actors,

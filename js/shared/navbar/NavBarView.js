@@ -86,8 +86,6 @@ export default class NavBar extends React.Component {
     }
 
     static updateNavbarTitle(newTitle) {
-        console.log("Switch title to " + newTitle);
-
         INSTANCE.setState({
                 movieTitle: newTitle
         })

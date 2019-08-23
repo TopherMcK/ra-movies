@@ -27,7 +27,6 @@ export default class MainView extends React.Component {
 
     componentDidMount() {
         this.setupSubscriptions();
-        console.log("Main View Nav: " + this.props.navigation.navigate);
     }
 
     setupSubscriptions() {
@@ -73,8 +72,6 @@ export default class MainView extends React.Component {
     getSearchResultsView() {
         if(this.state.hasValidSearchSuggestions) {
             const searchResult = this.state.searchSuggestions
-            console.log("Search Suggestions: " + JSON.stringify(this.state.searchSuggestions));
-
             return <View>
             <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
             <FlatList data={searchResult.Search} renderItem={({ item }) =>

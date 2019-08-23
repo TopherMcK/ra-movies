@@ -15,6 +15,13 @@ export const ratingImageUtil = {
     },
 
     getStarImageWidth(rawImdbRating) {
-        return 138 * rawImdbRating.split("/")[0] / 10
+        if (rawImdbRating != undefined) {
+            if (rawImdbRating === 'N/A') {
+                return 0;
+            }
+            return 138 * rawImdbRating.split("/")[0] / 10;
+        } else {
+            return 0;
+        }
     }
 }

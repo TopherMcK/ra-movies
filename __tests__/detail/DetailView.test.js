@@ -125,7 +125,6 @@ describe('DetailView', () => {
 
             expectedSrcUri.testUri = "../../../assets/stars.png";
             let image = testComponent.find("#imdbRating");
-            console.log("What is my image style? " + JSON.stringify(image.props()));
             expect(image.length).toBe(1);
             expect(image.props().source).toStrictEqual(expectedSrcUri);
             expect(getStarImageWidth).toBeCalledWith(props.detailMovie.ImdbRating);

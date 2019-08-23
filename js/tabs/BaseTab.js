@@ -5,6 +5,7 @@ import DetailView from '../detail/DetailView';
 import { titleService } from '../rest/TitleService';
 import NavBarView from '../shared/navbar/NavBarView';
 import { contentLoadingObserver } from '../observers/ContenLoadingObserver';
+import { ratingImageUtil } from '../utils/RatingImageUtil';
 
 export default class BaseTab extends React.Component {
     static shouldShow = false

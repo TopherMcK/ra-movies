@@ -13,3 +13,18 @@ export const searchService = {
         }
     }
 }
+
+export const dumpsterService = {
+    async getDumpsterSuggestionResults(searchParam) {
+        urlRequest = omdbURL + "s=" + searchParam + "&type=movie&apikey=" + omdbApiKey;
+        try {
+            const response = await fetch(urlRequest);
+            const responseJson = await response.json();
+
+            return responseJson;
+        }
+        catch (error) {
+            console.log("Dumpster Service Error : " + error);
+        }
+    }
+}

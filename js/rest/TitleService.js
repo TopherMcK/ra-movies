@@ -8,8 +8,6 @@ export const titleService = {
         try {
             const response = await fetch(urlRequest);
             const responseJson = await response.json();
-
-            console.log("@@@@@ title result: \n" + JSON.stringify(responseJson))
             return responseJson;
         }
         catch (error) {

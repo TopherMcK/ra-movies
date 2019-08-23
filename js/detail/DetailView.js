@@ -44,7 +44,7 @@ export default class DetailView extends React.Component {
                         <Text id="director" style={{fontSize: 20, marginTop: 15, fontWeight: "bold", color: blockbusterYellow}}>{`Director:\n`}{this.props.detailMovie.Director}</Text>
                         {this.castListView()}
 
-                        <View style={{width: ratingImageUtil.getStarImageWidth(this.props.detailMovie.Ratings[0].Value), overflow: 'hidden'}}>
+                        <View style={{width: ratingImageUtil.getStarImageWidth(this.props.detailMovie.imdbRating), overflow: 'hidden'}}>
                             <Image id="imdbRating" source={require("../../assets/stars.png")} style={{width: 138, tintColor: blockbusterYellow}} />
                         </View>
                     </View>
