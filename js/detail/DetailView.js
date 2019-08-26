@@ -5,15 +5,22 @@ import { ratingImageUtil } from '../utils/RatingImageUtil';
 import BasicHeader from '../shared/BasicHeader';
 import { blockbusterBlue, blockbusterYellow } from '../utils/AppConstants';
 import { contentLoadingObserver } from '../observers/ContenLoadingObserver';
+import { historyOfMovies } from '../utils/AppConstants';
 
 export default class DetailView extends React.Component {
     constructor(props) {
         super(props);
+        for (var i = 0; i < historyOfMovies.length; i++) {
+            if (historyOfMovies[i].Title === this.props.detailMovie.Title) {
+                historyOfMovies.splice(i, 1);
+            }
+        }
+        historyOfMovies.unshift(this.props.detailMovie);
     }
 
     castListView() {
         castList = this.convertToCastList(this.props.detailMovie.Actors);
-        return <FlatList id="cast" style={{marginTop:15}} ListHeaderComponent={<BasicHeader />} data={castList} renderItem={({ item }) =>
+        return <FlatList id="cast" style={{marginTop:15}} ListHeaderComponent={<BasicHeader />} data={castList} keyExtractor={(item, index) => item + index} renderItem={({ item }) =>
             <Text id="actorName" style={{paddingLeft: 5, fontSize: 15, color: "#fff"}}>{`\u2022`} {item}</Text>
         } />
     }

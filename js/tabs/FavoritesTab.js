@@ -43,10 +43,9 @@ export default class HomeTab extends BaseTab {
         if(this.state.hasValidSearchSuggestions) {
             return  <View>
                      <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
-                     <FlatList data={this.resultsArray} renderItem={({ item }) =>
+                     <FlatList data={this.resultsArray} keyExtractor={(item, index) => item + index} renderItem={({ item }) =>
                      <TouchableOpacity activeOpacity={1} onPress={() => this.sendUserToMovieDetail(item.Title)} >
                         <HomeCell item={this.SetupCell(item)} />
-                        {/* <Text>{item.Title}</Text> */}
                      </TouchableOpacity>
                      }
                    />
@@ -72,7 +71,7 @@ export default class HomeTab extends BaseTab {
             },
             title: item.Title,
             year: item.Year,
-            imdbRating: item.imdbRating,// defaultRating[0].Value,
+            imdbRating: item.imdbRating,
             rated: item.Rated,
             director: item.Director,
             cast: item.Actors,

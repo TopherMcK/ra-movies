@@ -46,7 +46,7 @@ export default class HomeTab extends BaseTab {
         if(this.state.hasValidSearchSuggestions) {
             return  <View>
                      <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
-                     <FlatList data={this.resultsArray} renderItem={({ item }) =>
+                     <FlatList data={this.resultsArray} keyExtractor={(item, index) => item + index} renderItem={({ item }) =>
                      <TouchableOpacity activeOpacity={1} onPress={() => this.sendUserToMovieDetail(item.Title)} >
                         <HomeCell item={this.SetupCell(item)} />
                      </TouchableOpacity>
