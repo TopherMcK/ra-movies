@@ -1,13 +1,11 @@
 import React from 'react';
-import { Image, StyleSheet, Text, View } from 'react-native'
+import { Image, Text, View } from 'react-native'
 import { globalStyle } from '../../utils/GlobalStyles';
 
 export default class SearchResultsCell extends React.Component {
     constructor(props) {
         super(props);
-
         this.props = props
-
         this.state  = {
             titleReady: props.item.Title
         }

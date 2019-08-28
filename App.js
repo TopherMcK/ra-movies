@@ -1,8 +1,12 @@
-// import React from 'react';
-import { Dimensions } from 'react-native';
-// import Routes from './Routes'
-import { DrawerNavigator } from 'react-navigation';
+import { DrawerNavigator, SwitchNavigator } from 'react-navigation';
 import HamburgerMenuView from './js/shared/hamburger_menu/HamburgerMenuView';
+import React from 'react'
+import { Image, TouchableOpacity, Dimensions } from 'react-native'
+import Loading from './js/login flow/Loading'
+import SignUp from './js/login flow/Signup'
+import Login from './js/login flow/Login'
+import Routes from './Routes'
+import  { globalStyle } from './js/utils/GlobalStyles';
 
 const DrawerNav = DrawerNavigator({
   Item1: {
@@ -14,23 +18,6 @@ const DrawerNav = DrawerNavigator({
     drawerType: 'slide',
     drawerWidth: Dimensions.get('window').width - 120,
 });
-
-// export default class App extends React.Component {
-//   render() {
-//     return (
-//       <DrawerNav />
-//     );
-//   }
-// }
-
-import React from 'react'
-import { Image, TouchableOpacity } from 'react-native'
-import { SwitchNavigator } from 'react-navigation'
-import Loading from './js/login flow/Loading'
-import SignUp from './js/login flow/Signup'
-import Login from './js/login flow/Login'
-import Routes from './Routes'
-import  { globalStyle } from './js/utils/GlobalStyles';
 
 const App = SwitchNavigator(
   {
@@ -51,5 +38,4 @@ function getMenuButton(navigation) {
 }
 
 console.disableYellowBox = true;
-
 export default App

@@ -29,7 +29,7 @@ export default class HomeTab extends BaseTab {
     }
 
     componentWillUnmount() {
-        if (homeSubscription!= null) {
+        if (homeSubscription != null) {
             homeSubscription.unsubscribe()
             homeSubscription = null
         }
@@ -40,17 +40,17 @@ export default class HomeTab extends BaseTab {
     }
 
     showLoadingOrHomeList() {
-        if(this.state.hasValidSearchSuggestions) {
-            return  <View>
-                     <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
-                     <FlatList data={this.resultsArray} keyExtractor={(item, index) => item + index} renderItem={({ item }) =>
-                     <TouchableOpacity activeOpacity={1} onPress={() => this.sendUserToMovieDetail(item.Title)} >
+        if (this.state.hasValidSearchSuggestions) {
+            return <View>
+                <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
+                <FlatList data={this.resultsArray} keyExtractor={(item, index) => item + index} renderItem={({ item }) =>
+                    <TouchableOpacity activeOpacity={1} onPress={() => this.sendUserToMovieDetail(item.Title)} >
                         <HomeCell item={this.SetupCell(item)} />
-                     </TouchableOpacity>
-                     }
-                   />
-              </View>
-        } 
+                    </TouchableOpacity>
+                }
+                />
+            </View>
+        }
         else {
             return <Text>Getting Results...</Text>
         }
@@ -83,18 +83,18 @@ export default class HomeTab extends BaseTab {
         titleService.getTitleResult(title).then((response) => {
             this.handleDumpsterMovieResponse(response);
         });
-}
+    }
 
     handleDumpsterMovieResponse(response) {
-                this.resultsArray.push(response)
-                if(this.resultsRetrieved < 20 && this.searchSuggestions.length > this.resultsRetrieved && this.searchSuggestions[this.resultsRetrieved].Title != undefined) {
+        this.resultsArray.push(response)
+        if (this.resultsRetrieved < 20 && this.searchSuggestions.length > this.resultsRetrieved && this.searchSuggestions[this.resultsRetrieved].Title != undefined) {
 
-                } else {
-                    this.setState({
-                        hasValidSearchSuggestions: true,
-                        isLoading: false,
-                    })
-                }
-                this.resultsRetrieved++
+        } else {
+            this.setState({
+                hasValidSearchSuggestions: true,
+                isLoading: false,
+            })
+        }
+        this.resultsRetrieved++
     }
 }

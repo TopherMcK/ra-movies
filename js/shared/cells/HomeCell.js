@@ -6,9 +6,7 @@ import { ratingImageUtil } from '../../utils/RatingImageUtil';
 export default class HomeCell extends React.Component {
     constructor(props) {
         super(props);
-
         this.props = props
-
         this.state  = {
             titleReady: props.item.Title,
             starWidth: 0,

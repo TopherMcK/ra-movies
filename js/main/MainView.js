@@ -1,10 +1,9 @@
 import React from 'react';
 import BottomTabNavigation from '../../BottTabNavigation';
-
 import { FlatList, Text, View } from 'react-native'
 import { searchSuggestionObserver } from '../observers/SearchResultsObserver';
-import { contentLoadingObserver } from '../observers/ContenLoadingObserver'
-import  { globalStyle } from '../utils/GlobalStyles';
+import { contentLoadingObserver } from '../observers/ContentLoadingObserver'
+import { globalStyle } from '../utils/GlobalStyles';
 import { navigationObserver } from '../observers/NavigationObserver'
 import { activityIndicatorHelper } from '../shared/indicators/ActivityIndicatorHelper'
 import SearchResultCell from '../shared/cells/SearchResultCell'
@@ -12,11 +11,10 @@ import SearchResultCell from '../shared/cells/SearchResultCell'
 export default class MainView extends React.Component {
     static navigationOptions = {
         headerStyle: globalStyle.NavBackground
-     }
+    }
 
     constructor() {
         super();
-
         this.state = {
             isSearching: false,
             isLoading: false,
@@ -43,13 +41,7 @@ export default class MainView extends React.Component {
         });
 
         searchSuggestionObserver.getSearchSuggestionResults().subscribe((value) => {
-            // this.setState({
-            //     isSearching: true,
-            //     isLoading: false,
-            //     hasValidSearchSuggestions: value.hasValidResponse,
-            //     searchSuggestions: value.results
-            // });
-            // contentLoadingObserver.sendIsContentLoading(false);
+            // todo
         });
     }
 
@@ -62,7 +54,7 @@ export default class MainView extends React.Component {
     getMainView() {
         if (this.state.isSearching) {
             return <View>
-                { this.getSearchResultsView() }
+                {this.getSearchResultsView()}
             </View>;
         } else {
             return <BottomTabNavigation />;
@@ -70,21 +62,20 @@ export default class MainView extends React.Component {
     }
 
     getSearchResultsView() {
-        if(this.state.hasValidSearchSuggestions) {
+        if (this.state.hasValidSearchSuggestions) {
             const searchResult = this.state.searchSuggestions
             return <View>
-            <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
-            <FlatList data={searchResult.Search} renderItem={({ item }) =>
-              <SearchResultCell item={this.SetupCell(item)} />
-            }
-          />
-          </View>
-        } 
+                <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
+                <FlatList data={searchResult.Search} renderItem={({ item }) =>
+                    <SearchResultCell item={this.SetupCell(item)} />
+                } />
+            </View>
+        }
         else {
             return <View>
-            <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
+                <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
                 <Text>No results found...</Text>
-                </View>;
+            </View>;
         }
     }
 
@@ -96,7 +87,6 @@ export default class MainView extends React.Component {
             title: item.Title,
             year: item.Year
         }
-
         return Cell;
     }
 }

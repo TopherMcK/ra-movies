@@ -4,7 +4,7 @@ import { globalStyle } from '../utils/GlobalStyles';
 import { ratingImageUtil } from '../utils/RatingImageUtil';
 import BasicHeader from '../shared/BasicHeader';
 import { blockbusterBlue, blockbusterYellow } from '../utils/AppConstants';
-import { contentLoadingObserver } from '../observers/ContenLoadingObserver';
+import { contentLoadingObserver } from '../observers/ContentLoadingObserver';
 import { historyOfMovies } from '../utils/AppConstants';
 
 export default class DetailView extends React.Component {
@@ -66,6 +66,7 @@ export default class DetailView extends React.Component {
     }
 
     returnUser() {
+        
         contentLoadingObserver.sendIsContentLoading(false);
     }
 }

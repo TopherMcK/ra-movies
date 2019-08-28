@@ -1,7 +1,4 @@
 import React from 'react';
-
-import Login from './js/login flow/Login';
-
 import { StackNavigator } from 'react-navigation';
 import { Image, TouchableOpacity } from 'react-native';
 import NavBar from './js/shared/navbar/NavBarView';

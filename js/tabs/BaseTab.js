@@ -4,8 +4,7 @@ import { activityIndicatorHelper } from '../shared/indicators/ActivityIndicatorH
 import DetailView from '../detail/DetailView';
 import { titleService } from '../rest/TitleService';
 import NavBarView from '../shared/navbar/NavBarView';
-import { contentLoadingObserver } from '../observers/ContenLoadingObserver';
-import { ratingImageUtil } from '../utils/RatingImageUtil';
+import { contentLoadingObserver } from '../observers/ContentLoadingObserver';
 
 export default class BaseTab extends React.Component {
     static shouldShow = false
@@ -66,7 +65,6 @@ export default class BaseTab extends React.Component {
                     isLoading: false,
                     preloadedData: true,
                 })
-                NavBarView.updateNavbarTitle(response.Title)
             }
         });
     }

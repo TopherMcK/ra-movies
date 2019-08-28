@@ -17,11 +17,11 @@ export default class Signup extends React.Component {
     handleSignUp = () => {
         console.log("Handle Sign up");
         const { email, password } = this.state
-        console.log(email+"/"+password);
+        console.log(email + "/" + password);
         firebase
             .auth()
             .createUserWithEmailAndPassword(email, password)
-            .then(() => this.props.navigation.navigate('Routes'))
+            .then(() => this.props.navigation.navigate('DrawerNav'))
             .catch(error => this.setState({ errorMessage: error.message }))
     }
 
@@ -54,7 +54,6 @@ export default class Signup extends React.Component {
 
     render() {
         return (
-
             <View style={globalStyle.LoginContainer}>
                 <View style={globalStyle.LoginSpacer}></View>
                 <View id="loginWrapper" style={globalStyle.LoginView}>
@@ -86,15 +85,15 @@ export default class Signup extends React.Component {
                                 />
                             </View>
                             <View id="buttonsWrapper" style={globalStyle.LoginGroup}>
-                             <ButtonScaler activeOpacity={1} id="signupBtn" style={this.disabled ? globalStyle.LoginButtonPressed : globalStyle.LoginButton} disabled={false} onPress={this.handleSignUp}>
-                                 <Text style={globalStyle.LoginButtonText}>Sign Up</Text>
-                             </ButtonScaler>
-                         </View>
+                                <ButtonScaler activeOpacity={1} id="signupBtn" style={this.disabled ? globalStyle.LoginButtonPressed : globalStyle.LoginButton} disabled={false} onPress={this.handleSignUp}>
+                                    <Text style={globalStyle.LoginButtonText}>Sign Up</Text>
+                                </ButtonScaler>
+                            </View>
                             <View id="buttonsWrapper" style={globalStyle.LoginGroup}>
-                             <ButtonScaler activeOpacity={1} style={globalStyle.LoginButton} onPress={() => this.props.navigation.navigate('Login')}>
-                                 <Text style={globalStyle.LoginButtonText}>Already have an account? Login</Text>
-                             </ButtonScaler>
-                         </View>
+                                <ButtonScaler activeOpacity={1} style={globalStyle.LoginButton} onPress={() => this.props.navigation.navigate('Login')}>
+                                    <Text style={globalStyle.LoginButtonText}>Already have an account? Login</Text>
+                                </ButtonScaler>
+                            </View>
                         </View>
                     </View>
                 </View>
