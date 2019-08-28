@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Login from './js/login/Login';
+import Login from './js/login flow/Login';
 
 import { StackNavigator } from 'react-navigation';
 import { Image, TouchableOpacity } from 'react-native';
@@ -10,9 +10,6 @@ import { globalStyle } from './js/utils/GlobalStyles';
 import DetailView from './js/detail/DetailView';
 
 const Routes = StackNavigator({
-  LoginRT: {
-    screen: Login
-  },
   MainRT: {
     screen: MainView,
     navigationOptions: ({ navigation }) => ({
@@ -37,13 +34,9 @@ const Routes = StackNavigator({
   }
 },
   {
-    initialRouteName: 'LoginRT'
+    initialRouteName: 'MainRT'
   }
 );
-
-// function getNavigation(navigation) {
-
-// }
 
 function getMenuButton(navigation) {
   return <TouchableOpacity id="navBarMenuBtn" onPress={() => navigation.openDrawer()}>
