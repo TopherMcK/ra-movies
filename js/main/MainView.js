@@ -74,7 +74,6 @@ export default class MainView extends React.Component {
         else {
             return <View>
                 <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
-                <Text>No results found...</Text>
             </View>;
         }
     }

@@ -29,6 +29,7 @@ target 'ramovies' do
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
   pod 'Firebase/Auth'
+  pod 'Firebase/Database'
 # Add the pods for the Firebase products you want to use in your app
 # For example, to use Firebase Authentication and Cloud Firestore
 # pod 'Firebase/Auth'

@@ -3,7 +3,6 @@ import { Text, View } from 'react-native';
 import { activityIndicatorHelper } from '../shared/indicators/ActivityIndicatorHelper';
 import DetailView from '../detail/DetailView';
 import { titleService } from '../rest/TitleService';
-import NavBarView from '../shared/navbar/NavBarView';
 import { contentLoadingObserver } from '../observers/ContentLoadingObserver';
 
 export default class BaseTab extends React.Component {
@@ -38,7 +37,7 @@ export default class BaseTab extends React.Component {
     }
 
     getTabContentView() {
-        return <Text>You mest override getTabContentView from BaseTab!</Text>;
+        return <Text>You must override getTabContentView from BaseTab!</Text>;
     }
 
     showDetailOrContentView() {

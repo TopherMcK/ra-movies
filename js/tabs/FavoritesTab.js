@@ -51,9 +51,6 @@ export default class HomeTab extends BaseTab {
                 />
             </View>
         }
-        else {
-            return <Text>Getting Results...</Text>
-        }
     }
 
     sendUserToMovieDetail(title) {

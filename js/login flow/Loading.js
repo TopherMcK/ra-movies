@@ -2,12 +2,31 @@ import React from 'react';
 import { Image, View, ActivityIndicator } from 'react-native';
 import { globalStyle } from '../utils/GlobalStyles';
 import firebase from 'react-native-firebase';
+import { updateHistoryArray } from '../utils/AppConstants';
 
 export default class Loading extends React.Component {
     componentDidMount() {
         firebase.auth().onAuthStateChanged(user => {
-            this.props.navigation.navigate(user ? 'DrawerNav' : 'SignUp')
+            console.log(">>>>>> LOGIN: " + JSON.stringify(user));
+            if (user) {
+                this.goToMainView(user.uid);
+            } else {
+                console.log(">>>>>>>> GO TO SIGN UP");
+                this.goToSignUp();
+            }
         })
+    }
+
+    goToMainView(currentUser) {
+        var historyRef = firebase.database().ref('users/' + currentUser + '/history');
+        historyRef.on('value', function(snapshot) {
+            updateHistoryArray(snapshot.val());
+        })        
+        this.props.navigation.navigate('DrawerNav');
+    }
+
+    goToSignUp() {
+        this.props.navigation.navigate('SignUp');
     }
 
     render() {

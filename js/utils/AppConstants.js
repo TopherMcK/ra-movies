@@ -1,3 +1,5 @@
+import firebase from "react-native-firebase";
+
 // User
 export const defaultUsername = "Guest";
 
@@ -8,7 +10,11 @@ export const dumpsterMovies = ['Street Fighter', 'Double Dragon', 'Mortal Kombat
 export const trendingMovies = ['Superhero', 'Vampires', 'Dragons', 'Toys', 'Dinosaurs', 'Monsters', 'Space'];
 
 // Movie History
-export const historyOfMovies = [];
+export var historyOfMovies = [];
+
+export function updateHistoryArray(newArray) {
+    historyOfMovies = newArray;
+}
 
 // API
 export const omdbApiKey = "aca04ec";

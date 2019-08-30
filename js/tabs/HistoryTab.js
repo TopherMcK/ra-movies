@@ -4,17 +4,9 @@ import HomeCell from '../shared/cells/HomeCell'
 import BaseTab from './BaseTab';
 import { activityIndicatorHelper } from '../shared/indicators/ActivityIndicatorHelper'
 import { NavigationEvents } from "react-navigation";
-import { historyOfMovies } from '../utils/AppConstants/'
+import { historyOfMovies } from '../utils/AppConstants';
 
 export default class HistoryTab extends BaseTab {
-
-    constructor(props) {
-        super(props);
-    }
-
-    componentDidMount() {
-        super.componentDidMount();
-    }
 
     getContentView() {
         return this.showHistoryList();
@@ -56,8 +48,8 @@ export default class HistoryTab extends BaseTab {
                 />
                 <FlatList data={historyOfMovies} extraData={this.state} keyExtractor={(item, index) => item + index} renderItem={({ item }) =>
                     <TouchableOpacity activeOpacity={1} onPress={() => this.sendUserToMovieDetail(item.Title)} >
-                    <HomeCell item={this.SetupCell(item)} />
-                 </TouchableOpacity>
+                        <HomeCell item={this.SetupCell(item)} />
+                    </TouchableOpacity>
                 }
                 />
             </View>

@@ -71,9 +71,6 @@ export default class TrendingTab extends BaseTab {
                 />
             </View>
         }
-        else {
-            return <Text>Getting Results...</Text>
-        }
     }
 
     sendUserToMovieDetail(title) {
@@ -91,7 +88,7 @@ export default class TrendingTab extends BaseTab {
             },
             title: item.Title,
             year: item.Year,
-            imdbRating: item.imdbRating,// defaultRating[0].Value,
+            imdbRating: item.imdbRating,
             rated: item.Rated,
             director: item.Director,
             cast: item.Actors,

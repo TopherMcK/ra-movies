@@ -183,30 +183,35 @@ export const globalStyle = StyleSheet.create({
     },
     MovieListTextContainer: {
         height: 60,
-        width: 300,
+        width: "60%",
     },
     HomeListTitleLabel: {
         color: blockbusterBlue,
         fontWeight: 'bold',
-        fontSize: 20,
+        fontSize: 18,
+        overflow: 'hidden',
+        width: '100%',
     },
     HomeListDirectorLabel: {
         color: 'black',
         fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: 14,
+        overflow: 'hidden',
+        width: '100%',
+        paddingVertical: 10,
     },
     HomeListYearLabel: {
         color: 'black',
-        fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: 14,
+        paddingRight: 10,
     },
     HomeListItem: {
         flexDirection: "row",
         marginVertical: 10, 
         textAlign: 'center',
-        alignContent: 'center',
-        height: 200,
-        width: '98%',
+        alignSelf: 'center',
+        height: 250,
+        width: '92%',
         backgroundColor: 'white',
         borderRadius: 10,
         shadowColor: "#000",
@@ -214,10 +219,10 @@ export const globalStyle = StyleSheet.create({
             width: 0,
             height: 2,
         },
-        shadowOpacity: 0.23,
-        shadowRadius: 2.62,
+        shadowOpacity: 0.5,
+        shadowRadius: 2.5,
         elevation: 4,
-        overflow: "hidden",
+        
     }, 
     HomeListRating: {
         width: 20,
@@ -233,11 +238,15 @@ export const globalStyle = StyleSheet.create({
         width: 138,
         height: 20,
         marginRight: 10,
+        backgroundColor: 'blue',
     },
     HomeListPoster: {
         flex:1, 
         width: null, 
-        height: null 
+        height: '100%',
+        resizeMode: "cover",
+        borderBottomLeftRadius: 10,
+        borderTopLeftRadius: 10,
     },
     HomeListTextContainer: {
         padding: 10,
@@ -246,7 +255,7 @@ export const globalStyle = StyleSheet.create({
         width: 100,
         fontSize: 12,
         textAlign: "right" ,
-        color: "#e91e63"
+        color: "#e91e63",
     },
     LargeTitleLabel: {
         color: blockbusterYellow,

@@ -7,6 +7,7 @@ import SignUp from './js/login flow/Signup'
 import Login from './js/login flow/Login'
 import Routes from './Routes'
 import  { globalStyle } from './js/utils/GlobalStyles';
+import firebase from 'react-native-firebase';
 
 const DrawerNav = DrawerNavigator({
   Item1: {
@@ -31,6 +32,15 @@ const App = SwitchNavigator(
   }
 )
 
+const config = {
+  apiKey: "AIzaSyBn3f5PYPFl0QReWQiFhRypuTiCMCQSTWY",//"AIzaSyC2QIsoTKjAsmi0Pdr6iVmdK7c-6_-OLXU",
+  authDomain: "ramovies-52ad8.firebaseapp.com",
+  databaseURL: "https://ramovies-52ad8.firebaseio.com",
+  projectId: "ramovies-52ad8",
+  storageBucket: "",
+  messagingSenderId: "925276240313",
+};
+
 function getMenuButton(navigation) {
   return <TouchableOpacity id="navBarMenuBtn" onPress={() => navigation.openDrawer()}>
   <Image source={require("./assets/menu_icon.png")} style={globalStyle.NavBurger} />
@@ -38,4 +48,5 @@ function getMenuButton(navigation) {
 }
 
 console.disableYellowBox = true;
+firebase.config = config;
 export default App

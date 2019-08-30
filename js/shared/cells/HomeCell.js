@@ -7,7 +7,7 @@ export default class HomeCell extends React.Component {
     constructor(props) {
         super(props);
         this.props = props
-        this.state  = {
+        this.state = {
             titleReady: props.item.Title,
             starWidth: 0,
             title: this.props.item.title
@@ -25,25 +25,22 @@ export default class HomeCell extends React.Component {
     }
 
     render() {
-        return(
+        return (
             <View style={globalStyle.HomeListItem} >
-                <Image onError={(e) => console.log(e.nativeEvent.error) } style={globalStyle.HomeListPoster} source={{uri:this.props.item.imageSrc.uri}}/>
+                <Image onError={(e) => console.log(e.nativeEvent.error)} style={globalStyle.HomeListPoster} source={{ uri: this.props.item.imageSrc.uri }} />
                 <View style={globalStyle.MovieListTextContainer}>
                     <View style={globalStyle.HomeListTextContainer}>
-                        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
-                            <Image style={globalStyle.HomeListRating} source={ratingImageUtil.getImageForRating(this.props.item.rated)} />
-                            <Text style={globalStyle.HomeListTitleLabel}>{this.props.item.title}</Text>
-                        </View>
-                        <View style={{flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between'}}>
+                        <View style={{ flexDirection: 'column', alignItems: 'flex-start', justifyContent: 'space-between' }}>
+                            <Text numberOfLines={2} style={globalStyle.HomeListTitleLabel}>{this.props.item.title}</Text>
+                            <View style={{paddingVertical: 2, flexDirection: 'row'}}>
                             <Text style={globalStyle.HomeListYearLabel}>{this.props.item.year}</Text>
-                            <Text style={globalStyle.HomeListDirectorLabel}>Director: <Text style={{fontStyle: 'italic', fontWeight: 'normal'}}>{this.props.item.director}</Text></Text>
+                            <Image style={globalStyle.HomeListRating} source={ratingImageUtil.getImageForRating(this.props.item.rated)} />
+                            </View>
+                            <Text style={globalStyle.HomeListDirectorLabel}>Director: <Text numberOfLines={2} style={{ fontStyle: 'italic', fontWeight: 'normal' }}>{this.props.item.director}</Text></Text>
                         </View>
-                        <View style={{paddingVertical: 15}}>
-                        <Text style={globalStyle.HomeListDirectorLabel}>Cast: <Text style={{fontStyle: 'italic', fontWeight: 'normal'}}>{this.props.item.cast}</Text></Text>
-                        </View>
-
-                        <View style={{width: ratingImageUtil.getStarImageWidth(this.props.item.imdbRating), overflow: 'hidden'}}>
-                            <Image style={{width: 138}} source={require('../../../assets/stars.png')} />
+                        <Text style={globalStyle.HomeListDirectorLabel}>Cast: <Text numberOfLines={2} style={{ fontStyle: 'italic', fontWeight: 'normal' }}>{this.props.item.cast}</Text></Text>
+                        <View style={{ width: ratingImageUtil.getStarImageWidth(this.props.item.imdbRating), justifyContent: 'flex-end', overflow: 'hidden' }}>
+                            <Image style={{ width: 138 }} source={require('../../../assets/stars.png')} />
                         </View>
                     </View>
                 </View>

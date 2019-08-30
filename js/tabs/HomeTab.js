@@ -1,7 +1,6 @@
 import React from 'react';
 import { FlatList, View, Text, TouchableOpacity } from 'react-native';
 import { searchService } from '../rest/SearchService';
-import { activityIndicatorHelper } from '../shared/indicators/ActivityIndicatorHelper'
 import HomeCell from '../shared/cells/HomeCell'
 import BaseTab from './BaseTab';
 import { titleService } from '../rest/TitleService';
@@ -25,14 +24,14 @@ export default class HomeTab extends BaseTab {
         super.componentDidMount();
         searchService.getSearchSuggestionResults('Home').then((response) => {
             this.searchSuggestions = response
-            if(response != null && response.Search != null && response.Search.length > 0) {
+            if (response != null && response.Search != null && response.Search.length > 0) {
                 this.retrieveHomeMovies(response.Search[0].Title);
             }
         });
     }
 
     componentWillUnmount() {
-        if (homeSubscription!= null) {
+        if (homeSubscription != null) {
             homeSubscription.unsubscribe()
             homeSubscription = null
         }
@@ -43,19 +42,15 @@ export default class HomeTab extends BaseTab {
     }
 
     showLoadingOrHomeList() {
-        if(this.state.hasValidSearchSuggestions) {
-            return  <View>
-                     <View>{activityIndicatorHelper.checkToShowActivityIndicator(this.state.isLoading)}</View>
-                     <FlatList data={this.resultsArray} keyExtractor={(item, index) => item + index} renderItem={({ item }) =>
-                     <TouchableOpacity activeOpacity={1} onPress={() => this.sendUserToMovieDetail(item.Title)} >
+        if (this.state.hasValidSearchSuggestions) {
+            return <View>
+                <FlatList data={this.resultsArray} keyExtractor={(item, index) => item + index} renderItem={({ item }) =>
+                    <TouchableOpacity activeOpacity={1} onPress={() => this.sendUserToMovieDetail(item.Title)} >
                         <HomeCell item={this.SetupCell(item)} />
-                     </TouchableOpacity>
-                     }
-                   />
-              </View>
-        } 
-        else {
-            return <Text>Getting Results...</Text>
+                    </TouchableOpacity>
+                }
+                />
+            </View>
         }
     }
 
@@ -82,23 +77,23 @@ export default class HomeTab extends BaseTab {
         return Cell;
     }
 
-     retrieveHomeMovies(title) {
-            titleService.getTitleResult(title).then((response) => {
-                this.handleHomeMovieResponse(response);
-            });
+    retrieveHomeMovies(title) {
+        titleService.getTitleResult(title).then((response) => {
+            this.handleHomeMovieResponse(response);
+        });
     }
 
     handleHomeMovieResponse(response) {
-                this.resultsRetrieved++
-                this.resultsArray.push(response)
-            
-                if(this.resultsRetrieved < 10 && this.searchSuggestions.Search.length > this.resultsRetrieved && this.searchSuggestions.Search[this.resultsRetrieved].Title != undefined) {
-                    this.retrieveHomeMovies(this.searchSuggestions.Search[this.resultsRetrieved].Title);
-                } else {
-                    this.setState({
-                        hasValidSearchSuggestions: true,
-                        isLoading: false,
-                    })
-                }
+        this.resultsRetrieved++
+        this.resultsArray.push(response)
+
+        if (this.resultsRetrieved < 10 && this.searchSuggestions.Search.length > this.resultsRetrieved && this.searchSuggestions.Search[this.resultsRetrieved].Title != undefined) {
+            this.retrieveHomeMovies(this.searchSuggestions.Search[this.resultsRetrieved].Title);
+        } else {
+            this.setState({
+                hasValidSearchSuggestions: true,
+                isLoading: false,
+            })
+        }
     }
 }
